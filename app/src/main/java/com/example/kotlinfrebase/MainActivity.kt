@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
-
+//        loginCheck()
 
         var inputEmail: EditText =findViewById(R.id.inputEmail)
         var inputPassword: EditText =findViewById(R.id.inputPassword)
@@ -42,6 +42,12 @@ class MainActivity : AppCompatActivity() {
             signUp()
         })
     }
+
+//    private fun loginCheck() {
+//
+//        if (mAuth.currentUser)
+//    }
+
     fun loginHandle() {
         var email: String = inputEmail.text.toString().trim()
         var password: String = inputPassword.text.toString().trim()
@@ -64,7 +70,8 @@ class MainActivity : AppCompatActivity() {
         val intern = Intent(this,Register::class.java)
         startActivity(intern)
     }
-    fun new(){
+    fun logOut(){
+
 
     }
 }
