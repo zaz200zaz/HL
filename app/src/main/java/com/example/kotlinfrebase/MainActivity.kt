@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.List
 
@@ -42,24 +43,27 @@ class MainActivity : AppCompatActivity() {
         })
     }
     fun loginHandle() {
-        var email: String = inputEmail.text.toString()
-        var password: String = inputPassword.text.toString()
+        var email: String = inputEmail.text.toString().trim()
+        var password: String = inputPassword.text.toString().trim()
 
-        if (email == "admin@gmail.com" && password == "123456") {
-
-            Toast.makeText(this, "ログイン成功", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, List::class.java)
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, "ログイン失敗", Toast.LENGTH_LONG).show()
+        if (inputEmail.text.toString().trim().isEmpty()||inputPassword.text.toString().trim().isEmpty()){
+            Toast.makeText(this, "エラー", Toast.LENGTH_LONG).show()
+        }else{
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task->
+                if (task.isSuccessful){
+                    Toast.makeText(this, "ログイン成功", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, ListUser::class.java))
+                    finish()
+                }else{
+                    Toast.makeText(this, "ログイン失敗", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
     fun signUp(){
         val intern = Intent(this,Register::class.java)
         startActivity(intern)
     }
-
-
     fun new(){
 
     }
