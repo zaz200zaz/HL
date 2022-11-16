@@ -1,5 +1,6 @@
 package com.example.kotlinfrebase
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
-
+        loginCheck()
 
         var inputEmail: EditText =findViewById(R.id.inputEmail)
         var inputPassword: EditText =findViewById(R.id.inputPassword)
@@ -42,6 +43,16 @@ class MainActivity : AppCompatActivity() {
             signUp()
         })
     }
+
+    private fun loginCheck() {
+
+        if (mAuth.currentUser != null){
+
+            startActivity(Intent(this,ListUser::class.java))
+            finish()
+        }
+    }
+
     fun loginHandle() {
         var email: String = inputEmail.text.toString().trim()
         var password: String = inputPassword.text.toString().trim()
@@ -49,6 +60,10 @@ class MainActivity : AppCompatActivity() {
         if (inputEmail.text.toString().trim().isEmpty()||inputPassword.text.toString().trim().isEmpty()){
             Toast.makeText(this, "エラー", Toast.LENGTH_LONG).show()
         }else{
+            val progre = ProgressDialog(this@MainActivity)
+            progre.setTitle("❣❣❣❣ログイン中...❣❣❣❣")
+            progre.setMessage("今、ログインしています。少々お待ちください。")
+            progre.show()
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task->
                 if (task.isSuccessful){
                     Toast.makeText(this, "ログイン成功", Toast.LENGTH_LONG).show()
@@ -57,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     Toast.makeText(this, "ログイン失敗", Toast.LENGTH_LONG).show()
                 }
+                progre.dismiss()
             }
         }
     }
@@ -64,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         val intern = Intent(this,Register::class.java)
         startActivity(intern)
     }
-    fun new(){
+    fun logOut(){
 
     }
 }
