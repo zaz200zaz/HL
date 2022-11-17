@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.aa.*
+import kotlinx.android.synthetic.main.activity_list.*
 
 class ListUser : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,5 +20,9 @@ class ListUser : AppCompatActivity() {
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         })
+        add.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this,FaceToFacePicker::class.java))
+        })
+
     }
 }
