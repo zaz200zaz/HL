@@ -26,16 +26,16 @@ class Register : AppCompatActivity() {
         AlreadyHaveAccount.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this,MainActivity::class.java))
         })
+
         btnRegister.setOnClickListener(View.OnClickListener
         {
 
             check(inputEmail.text.toString().trim(),InputConfirmEmail.text.toString().trim(),
                 inputPasswords.text.toString().trim(),InputConfirmPassword.text.toString().trim(),)
         })
-
-
     }
 
+//
     private fun check(trim: String, trim1: String, trim2: String, trim3: String) {
         var checkEmail: Boolean = false
         var checkPassword: Boolean = false
