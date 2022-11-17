@@ -27,7 +27,6 @@ class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAda
 
 
     class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-
         val name:TextView=itemView.findViewById(R.id.name)
         val condition:TextView=itemView.findViewById(R.id.condition)
     }

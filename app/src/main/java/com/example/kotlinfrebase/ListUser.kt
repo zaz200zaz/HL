@@ -47,7 +47,8 @@ class ListUser : AppCompatActivity() {
         })
 
         add.setOnClickListener(View.OnClickListener {
-            Addlist()
+            startActivity(Intent(this,Personal_Page::class.java))
+            finish()
         })
     }
 
@@ -71,20 +72,22 @@ class ListUser : AppCompatActivity() {
     }
 
 
-    private fun Addlist() {
-        var name1:String=name.text.toString()
-        var condition1:String=condition.text.toString()
-       if (name1.isEmpty()){
-           name.setError("名前を入力してください")
-       }else if (condition1.isEmpty()){
-           condition.setError("状態を入力してください")
-       }else{
+  //  private fun Addlist() {
+  //     var name1:String=name.text.toString()
+  //   var condition1:String=condition.text.toString()
 
-          var hashMap=HashMap<String,Any>()
-           hashMap["name"]=name1
-           hashMap["condition"]=condition1
-       }
-    }
+  //if (name1.isEmpty()){
+  //  name.setError("名前を入力してください")
+
+  //}else if (condition1.isEmpty()){
+  //  condition.setError("状態を入力してください")
+
+  //}else{
+  // var hashMap=HashMap<String,Any>()
+  //hashMap["name"]=name1
+  //hashMap["condition"]=condition1
+  //   }
+  // }
 }
 
 
