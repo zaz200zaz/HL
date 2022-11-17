@@ -42,6 +42,10 @@ class ListUser : AppCompatActivity() {
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         })
+
+        add.setOnClickListener(View.OnClickListener {
+            Addlist()
+        })
     }
 
     private fun Loadlist() {
