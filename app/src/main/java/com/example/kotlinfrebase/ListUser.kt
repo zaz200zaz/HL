@@ -14,13 +14,16 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.single_view.*
 
 
 class ListUser : AppCompatActivity() {
 
     private lateinit var mRef: DatabaseReference
+    private lateinit var mUser:FirebaseUser
     private lateinit var userRecycleView:RecyclerView
     private lateinit var userArrayList:ArrayList<User>
 
@@ -69,6 +72,18 @@ class ListUser : AppCompatActivity() {
 
 
     private fun Addlist() {
+        var name1:String=name.text.toString()
+        var condition1:String=condition.text.toString()
+       if (name1.isEmpty()){
+           name.setError("名前を入力してください")
+       }else if (condition1.isEmpty()){
+           condition.setError("状態を入力してください")
+       }else{
+
+          var hashMap=HashMap<String,Any>()
+           hashMap["name"]=name1
+           hashMap["condition"]=condition1
+       }
     }
 }
 

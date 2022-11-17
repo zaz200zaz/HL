@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/addLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
+    <EditText
         android:id="@+id/name"
        android:hint="名前"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,7 +18,7 @@
         android:background="@drawable/square_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
+    <EditText
         android:id="@+id/condition"
         android:hint="状態"
         app:layout_constraintTop_toTopOf="parent"
