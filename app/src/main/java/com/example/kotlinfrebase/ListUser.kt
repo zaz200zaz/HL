@@ -53,7 +53,7 @@ class ListUser : AppCompatActivity() {
     }
 
     private fun Loadlist() {
-        mRef=FirebaseDatabase.getInstance().getReference("Users")
+        mRef=FirebaseDatabase.getInstance().getReference("FaceToFacePick")
         mRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                if (snapshot.exists()){

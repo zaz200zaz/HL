@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
 
-    <EditText
+    <TextView
         android:id="@+id/name"
        android:hint="名前"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,8 +26,8 @@
         android:layout_marginStart="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/condition"
+    <TextView
+        android:id="@+id/email"
         android:hint="状態"
         app:layout_constraintTop_toBottomOf="@id/name"
         android:layout_width="wrap_content"
