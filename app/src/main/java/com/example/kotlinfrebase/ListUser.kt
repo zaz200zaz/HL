@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.aa.*
 
 import android.widget.EditText
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.OnCompleteListener
@@ -48,6 +49,7 @@ class ListUser : AppCompatActivity() {
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         })
+
 
         add.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this,Personal_Page::class.java))
