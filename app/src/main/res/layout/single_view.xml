@@ -1,49 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:contentPadding="4dp"
     android:layout_width="match_parent"
+    app:cardBackgroundColor="#81C784"
     android:layout_height="wrap_content"
     android:id="@+id/addLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <EditText
-        android:id="@+id/name"
-       android:hint="名前"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/condition"
-        android:hint="状態"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:padding="10dp"
-        android:background="@drawable/square_border"/>
 
-    <Button
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/square_bg"
-        android:padding="10dp"
-        android:text="編集"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/relativeLayout"
+        android:padding="16dp">
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:id="@+id/item_title"
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="名前"
+            android:textSize="30dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:hint="状態"
+            android:id="@+id/item_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:textSize="30dp"
+            app:layout_constraintTop_toBottomOf="@id/item_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

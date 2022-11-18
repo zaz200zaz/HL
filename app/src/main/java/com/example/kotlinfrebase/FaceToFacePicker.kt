@@ -28,33 +28,51 @@ class FaceToFacePicker : AppCompatActivity() {
 
             refUsers = FirebaseDatabase.getInstance().reference.child("FaceToFacePick").child(UUID.randomUUID().toString())
             val userHasMap = HashMap<String, Any>()
-            userHasMap["name"] = editTextTextPersonName.text.toString()
-            userHasMap["email"] = editTextTextPersonName3.text.toString()
-            userHasMap["phoneNumber"] = editTextTextPersonName4.text.toString()
-            userHasMap["Photo"] =textView.text.toString()
+            userHasMap["名前"] = editTextTextPersonName.text.toString()
+            userHasMap["一次面接時間"] = x1n.text.toString()
+            userHasMap["一次面接コメント"] = x1km.text.toString()
+            userHasMap["一次面接結果"] =x1k.text.toString()
 
-            refUsers.updateChildren(userHasMap)
-                .addOnCompleteListener{task ->
-                    if (task.isSuccessful){
-                        Toast.makeText(this,"登録成功", Toast.LENGTH_LONG).show()
+            userHasMap["二次面接時間"] = x2n.text.toString()
+            userHasMap["二次面接コメント"] = x2km.text.toString()
+            userHasMap["二次面接結果"] =x2k.text.toString()
 
-                    }else{
-                        Toast.makeText(this,"エラー"+ task.exception!!.message, Toast.LENGTH_LONG).show()
-                    }
+            userHasMap["研修時間"] = x3n.text.toString()
+            userHasMap["研修コメント"] = x3km.text.toString()
+            userHasMap["研修結果"] =x3k.text.toString()
+
+            userHasMap["入社時間"] = kensyuu.text.toString()
+            userHasMap["入社コメント"] = kensyuu2.text.toString()
+
+
+            refUsers.updateChildren(userHasMap).addOnCompleteListener{task ->
+                if (task.isSuccessful){
+                    Toast.makeText(this,"登録成功", Toast.LENGTH_LONG).show()
+
+                }else{
+                    Toast.makeText(this,"エラー"+ task.exception!!.message, Toast.LENGTH_LONG).show()
                 }
+            }
         })
 
-        refUsers = FirebaseDatabase.getInstance().reference.child("FaceToFacePick")
+
+
+        ////////////////////////////
+
+
+
+
+                refUsers = FirebaseDatabase.getInstance().reference.child("FaceToFacePick")
         refUsers.addListenerForSingleValueEvent(object : ValueEventListener{
 
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot!!.children
                 children.forEach {
-                    var s:String = it.getValue(User::class.java)!!.getName()
-                    Log.d(TAG, "onDataChange: " + s)
-                    println("name :"+ it.getValue(User::class.java)!!.getName())
-                    textView2.setText(textView2.text.toString()+","+s)
+//                    var s:String = it.getValue(User::class.java)!!.getName()
+//                    Log.d(TAG, "onDataChange: " + s)
+//                    println("name :"+ it.getValue(User::class.java)!!.getName())
+//                    textView2.setText(textView2.text.toString()+","+s)
                 }
             }
 

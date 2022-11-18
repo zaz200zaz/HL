@@ -22,10 +22,10 @@ class ListUser : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mRef: DatabaseReference
     private lateinit var mUser: FirebaseUser
-    val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
-    var name=findViewById<EditText>(R.id.name)
-    var condition=findViewById<TextView>(R.id.condition)
-    Firebasecycler Adapter
+//    val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
+//    var name=findViewById<EditText>(R.id.name)
+//    var condition=findViewById<TextView>(R.id.condition)
+//    Firebasecycler Adapter
 
 
 
