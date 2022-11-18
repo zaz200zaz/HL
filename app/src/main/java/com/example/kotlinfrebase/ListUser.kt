@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.single_view.*
 
 
@@ -37,6 +38,8 @@ class ListUser : AppCompatActivity() {
 
         userArrayList= arrayListOf<User>()
         Loadlist()
+
+
 
         btnLogOut.setOnClickListener(View.OnClickListener {
 
