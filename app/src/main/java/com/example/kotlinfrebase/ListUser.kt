@@ -25,19 +25,19 @@ import kotlinx.android.synthetic.main.single_view.*
 class ListUser : AppCompatActivity() {
 
     private lateinit var mRef: DatabaseReference
-    private lateinit var mUser:FirebaseUser
-    private lateinit var userRecycleView:RecyclerView
-    private lateinit var userArrayList:ArrayList<User>
+    private lateinit var mUser: FirebaseUser
+    private lateinit var userRecycleView: RecyclerView
+    private lateinit var userArrayList: ArrayList<User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        userRecycleView=findViewById(R.id.recyclerView)
-        userRecycleView.layoutManager=LinearLayoutManager(this)
+        userRecycleView = findViewById(R.id.recyclerView)
+        userRecycleView.layoutManager = LinearLayoutManager(this)
         userRecycleView.setHasFixedSize(true)
 
-        userArrayList= arrayListOf<User>()
+        userArrayList = arrayListOf<User>()
         Loadlist()
 
 
@@ -46,28 +46,28 @@ class ListUser : AppCompatActivity() {
 
             FirebaseAuth.getInstance().signOut()
             Toast.makeText(this, "ログアウト成功", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         })
 
 
         add.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this,Personal_Page::class.java))
+            startActivity(Intent(this, Personal_Page::class.java))
             finish()
         })
     }
 
     private fun Loadlist() {
-        mRef=FirebaseDatabase.getInstance().getReference("FaceToFacePick")
-        mRef.addValueEventListener(object : ValueEventListener{
+        mRef = FirebaseDatabase.getInstance().getReference("FaceToFacePick")
+        mRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-               if (snapshot.exists()){
-                   for (userSnapshot in snapshot.children){
-                       val  user=userSnapshot.getValue(User::class.java)
-                       userArrayList.add(user!!)
-                   }
-                   userRecycleView.adapter=MyAdapter(userArrayList)
-               }
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+                        val user = userSnapshot.getValue(User::class.java)
+                        userArrayList.add(user!!)
+                    }
+                    userRecycleView.adapter = MyAdapter(userArrayList)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -75,24 +75,7 @@ class ListUser : AppCompatActivity() {
             }
         })
     }
-
-
-  //  private fun Addlist() {
-  //     var name1:String=name.text.toString()
-  //   var condition1:String=condition.text.toString()
-
-  //if (name1.isEmpty()){
-  //  name.setError("名前を入力してください")
-
-  //}else if (condition1.isEmpty()){
-  //  condition.setError("状態を入力してください")
-
-  //}else{
-  // var hashMap=HashMap<String,Any>()
-  //hashMap["name"]=name1
-  //hashMap["condition"]=condition1
-  //   }
-  // }
 }
+
 
 

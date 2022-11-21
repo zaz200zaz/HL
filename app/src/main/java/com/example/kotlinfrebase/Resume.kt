@@ -1,69 +1,92 @@
 package com.example.kotlinfrebase
 
-import android.app.Activity
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AlertDialog
-import com.google.android.gms.cast.framework.media.ImagePicker
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_resume.*
+import kotlinx.android.synthetic.main.return_bar.*
+import java.util.*
 
 
-class Resume:AppCompatActivity(){
+class Resume:AppCompatActivity() {
 
-    private val mStoRef=FirebaseStorage.getInstance().reference
-    private  lateinit var mProgressDialog: ProgressDialog
-    private val TAG="Resume"
 
-    companion object{
-        const val REQUEST_FROM_CAMERA=101
-        const val REQUEST_FROM_GALLERY=102
-    }
+    val storage = FirebaseStorage.getInstance()
+    val storageReference = storage.getReference()
+
+    private lateinit var imageUri: Uri
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resume)
 
-        resumeImage.setOnClickListener{
-            pickImageFromGallery()
+        LoadImage()
+
+        Return.setOnClickListener {
+            startActivity(Intent(this, Personal_Page::class.java))
+        }
+
+        resumeImage.setOnClickListener {
+            choosePicture()
         }
     }
 
+    private fun choosePicture() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.setType("image/*")
+        startActivityForResult(intent, 1)
 
+    }
 
-
-
-    override fun onActivityResult(requestCode:Int,resultCode: Int,data:Intent?){
-        super.onActivityResult(requestCode,resultCode,data)
-        if (resultCode==Activity.RESULT_OK){
-            when(requestCode){
-                REQUEST_FROM_GALLERY ->{
-                    resumeImage.setImageURI(data!!.data)
-                    Resume().uploadImage(this,data.data!!)
-                }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data!!.getData()!! != null) {
+            imageUri = data!!.getData()!!
+            resumeImage.setImageURI(imageUri)
+            save.setOnClickListener{
+                UpLoadImg()
             }
+
         }
     }
 
-    fun uploadImage(mContext: Context,imageURI:Uri){
-        mProgressDialog=ProgressDialog(mContext)
-        mProgressDialog.setMessage("please wait...")
-        mProgressDialog.show()
+    private fun UpLoadImg() {
+        val randomkey: String = UUID.randomUUID().toString()
 
-       val uploadTask= mStoRef.child("FaceToFacePick/resumeImg").putFile(imageURI)
-        uploadTask.addOnSuccessListener {
-            Log.e(TAG,"Successfully")
-            mProgressDialog.dismiss()
-        }.addOnFailureListener{
-            Log.e(TAG,"Failed")
-            mProgressDialog.dismiss()
+        val riversRef: StorageReference = storageReference.child("images/" + randomkey)
+        riversRef.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
+
+            val userHasMap = HashMap<String, Any>()
+            userHasMap["imageUrl"] = imageUri
+
+
+            Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show()
+
+        }.addOnFailureListener {
+
+            Toast.makeText(applicationContext, "Failed To Upload", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun LoadImage() {
+
 
     }
 }

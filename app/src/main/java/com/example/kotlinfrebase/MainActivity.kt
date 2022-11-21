@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         loginCheck()
 
-        var inputEmail: EditText =findViewById(R.id.inputEmail)
-        var inputPassword: EditText =findViewById(R.id.inputPassword)
         val btnLogin: Button =findViewById(R.id.btnLogin)
         val gotoRegister: TextView =findViewById(R.id.gotoRegister)
 

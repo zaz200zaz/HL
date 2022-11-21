@@ -29,6 +29,7 @@
         android:textColor="@color/grey"
         android:text="サンプル写真をクリックして、履歴書をアップロードしてください"/>
     <Button
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_bg"
