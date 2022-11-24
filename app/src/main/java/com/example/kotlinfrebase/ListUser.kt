@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Toast
 
 import kotlinx.android.synthetic.main.aa.*
-import kotlinx.android.synthetic.main.activity_list.*
 
 import android.widget.EditText
 import android.widget.TextView
@@ -22,10 +21,10 @@ class ListUser : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mRef: DatabaseReference
     private lateinit var mUser: FirebaseUser
-//    val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
-//    var name=findViewById<EditText>(R.id.name)
-//    var condition=findViewById<TextView>(R.id.condition)
-//    Firebasecycler Adapter
+    val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
+    var name=findViewById<EditText>(R.id.name)
+    var condition=findViewById<TextView>(R.id.condition)
+
 
 
 
@@ -40,9 +39,5 @@ class ListUser : AppCompatActivity() {
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         })
-        add.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this,FaceToFacePicker::class.java))
-        })
-
     }
 }

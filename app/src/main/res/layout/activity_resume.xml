@@ -3,36 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Resume_Upload">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/aa"
         layout="@layout/return_bar"/>
-    <Button
-        android:id="@+id/resumeUpload"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/aa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/square_border"
-        android:text="XXXの履歴書"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:textColor="@color/colorPrimaryDark"/>
+
     <ImageView
         android:id="@+id/resumeImage"
-        app:layout_constraintTop_toBottomOf="@+id/resumeUpload"
+        app:layout_constraintTop_toBottomOf="@id/aa"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:background="@drawable/resume"/>
+        android:src="@drawable/resume1"
+        android:layout_height="500dp"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/resumeImage"
+        app:layout_constraintStart_toStartOf="@id/resumeImage"
+        android:textSize="12sp"
+        android:textColor="@color/grey"
+        android:text="サンプル写真をクリックして、履歴書をアップロードしてください"/>
     <Button
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_bg"

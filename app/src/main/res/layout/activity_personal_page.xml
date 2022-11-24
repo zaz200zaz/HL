@@ -8,9 +8,21 @@
     <include
         layout="@layout/bb"
         android:id="@+id/Bar"/>
+    <EditText
+        android:id="@+id/namae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Bar"
+        android:hint="name"/>
     <TextView
         android:id="@+id/firstInterview"
-        app:layout_constraintTop_toBottomOf="@id/Bar"
+        app:layout_constraintTop_toBottomOf="@id/namae"
         app:layout_constraintStart_toStartOf="parent"
         android:text="一次面接"
         android:layout_marginTop="20dp"
@@ -23,7 +35,7 @@
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/firstInterviewCalendar"
-        app:layout_constraintTop_toBottomOf="@id/Bar"
+        app:layout_constraintTop_toBottomOf="@id/namae"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="15dp"
@@ -36,9 +48,9 @@
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
+    <EditText
         android:id="@+id/resultOfFirstInterview"
-        app:layout_constraintTop_toBottomOf="@id/Bar"
+        app:layout_constraintTop_toBottomOf="@id/namae"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="15dp"
         android:hint="合格"
@@ -101,7 +113,7 @@
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
+    <EditText
         android:id="@+id/resultOfSecondInterview"
         app:layout_constraintTop_toBottomOf="@id/line1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +178,7 @@
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
+    <EditText
         android:id="@+id/resultOfKensyuu"
         app:layout_constraintTop_toBottomOf="@id/line2"
         app:layout_constraintEnd_toEndOf="parent"

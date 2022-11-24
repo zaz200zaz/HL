@@ -1,45 +1,4 @@
 package com.example.kotlinfrebase
 
-class User {
-    private lateinit var name: String
-    private lateinit var email: String
-    private lateinit var phoneNumber: String
-    private lateinit var photo: String
+data class User(var 名前:String?=null,var 一次面接結果:String?=null,var 研修結果:String?=null,var 二次面接結果:String?=null,var imageUrl:String?=null)
 
-    constructor(name: String, email: String, phoneNumber: String, photo: String) {
-        this.name = name
-        this.email = email
-        this.phoneNumber = phoneNumber
-        this.photo = photo
-    }
-
-    constructor()
-    fun getName():String{
-        return name
-    }
-    fun setName(name:String){
-        this.name = name
-    }
-
-    fun getemail():String{
-        return email
-    }
-    fun setEmail(email:String){
-        this.email = email
-    }
-
-    fun getPhoneNumber():String{
-        return phoneNumber
-    }
-    fun setPhoneNumber(phoneNumber:String){
-        this.phoneNumber = phoneNumber
-    }
-
-    fun getPhoto():String{
-        return photo
-    }
-    fun setPhoto(photo:String){
-        this.photo = photo
-    }
-
-}
