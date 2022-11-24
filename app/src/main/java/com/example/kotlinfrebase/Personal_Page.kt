@@ -1,5 +1,16 @@
 package com.example.kotlinfrebase
 
+
+import android.content.Intent
+
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.bb.*
+import kotlinx.android.synthetic.main.return_bar.*
+import kotlinx.android.synthetic.main.return_bar.Return
+
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +22,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_personal_page.*
+
 
 class Personal_Page : AppCompatActivity() {
     lateinit var name:String
@@ -24,6 +36,22 @@ class Personal_Page : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
+
+
+        val resume:Button=findViewById(R.id.resume)
+        val Return:ImageView=findViewById(R.id.Return)
+
+        resume.setOnClickListener {
+                startActivity(Intent(this,Resume::class.java))
+        }
+        Return.setOnClickListener{
+            startActivity(Intent(this,ListUser::class.java))
+        }
+
+
+
+
+
 
         val test = arrayOf("合格","不合格","未定")
         var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
@@ -224,7 +252,6 @@ class Personal_Page : AppCompatActivity() {
                      m4: String,m44: String,
                      past: String) {
         val user = User(name, m1,m11,m111,m2,m22,m222,m3,m33,m333,m4,m44)
-
         FirebaseDatabase.getInstance().getReference("FaceToFacePick").child(past).setValue(user)
     }
 }

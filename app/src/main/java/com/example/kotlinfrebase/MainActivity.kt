@@ -80,5 +80,7 @@ class MainActivity : AppCompatActivity() {
         val intern = Intent(this,Register::class.java)
         startActivity(intern)
     }
+    fun logOut(){
 
+    }
 }
