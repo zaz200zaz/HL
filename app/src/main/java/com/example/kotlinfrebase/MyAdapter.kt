@@ -1,5 +1,6 @@
 package com.example.kotlinfrebase
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.nfc.Tag
@@ -18,6 +19,7 @@ import java.util.jar.Attributes
 
 class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.MyViewHolder> (){
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
       val itemView=LayoutInflater.from(parent.context).inflate(R.layout.single_view,parent,false)
         return MyViewHolder(itemView)
@@ -63,7 +65,9 @@ class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAda
 
         init {
             itemView.setOnClickListener{
+
                 itemView.context.startActivity(Intent(itemView.context,Personal_Page::class.java))
+
             }
         }
 
