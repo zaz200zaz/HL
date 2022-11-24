@@ -1,3 +1,8 @@
 package com.example.kotlinfrebase
 
-data class User(var 名前:String?=null,var 一次面接結果:String?=null,var 研修結果:String?=null,var 二次面接結果:String?=null,var imageUrl:String?=null)
+import android.net.Uri
+
+data class User(var 名前:String="",var 一次面接結果:String="",var 研修結果:String="",var 二次面接結果:String="")
+
+
+

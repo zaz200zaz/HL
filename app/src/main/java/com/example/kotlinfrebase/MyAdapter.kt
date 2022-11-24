@@ -1,19 +1,11 @@
 package com.example.kotlinfrebase
 
-import android.content.Context
 import android.content.Intent
-import android.nfc.Tag
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.*
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import java.util.jar.Attributes
 
 
 class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.MyViewHolder> (){
@@ -22,11 +14,14 @@ class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAda
       val itemView=LayoutInflater.from(parent.context).inflate(R.layout.single_view,parent,false)
         return MyViewHolder(itemView)
 
+
+
     }
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentitem = userlist[position]
+
 
         holder.name.text = currentitem.名前
 
@@ -58,7 +53,7 @@ class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAda
     class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 
         val name:TextView=itemView.findViewById(R.id.name)
-        val condition:TextView=itemView.findViewById(R.id.email)
+        val condition:TextView=itemView.findViewById(R.id.condition)
 
 
         init {

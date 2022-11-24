@@ -1,24 +1,18 @@
 package com.example.kotlinfrebase
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.RequestCreator
 import kotlinx.android.synthetic.main.activity_resume.*
 import kotlinx.android.synthetic.main.return_bar.*
 import java.util.*
@@ -30,14 +24,12 @@ class Resume:AppCompatActivity() {
     val storage = FirebaseStorage.getInstance()
     val storageReference = storage.getReference()
 
-    private lateinit var imageUri: Uri
+    public lateinit var imageUri: Uri
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resume)
-
-        LoadImage()
 
         Return.setOnClickListener {
             startActivity(Intent(this, Personal_Page::class.java))
@@ -60,7 +52,7 @@ class Resume:AppCompatActivity() {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data!!.getData()!! != null) {
             imageUri = data!!.getData()!!
             resumeImage.setImageURI(imageUri)
-            save.setOnClickListener{
+            save.setOnClickListener {
                 UpLoadImg()
             }
 
@@ -69,24 +61,38 @@ class Resume:AppCompatActivity() {
 
     private fun UpLoadImg() {
         val randomkey: String = UUID.randomUUID().toString()
-
+        val imgRef = FirebaseDatabase.getInstance().reference.child("FacetoFacePick/" + FirebaseAuth.getInstance().currentUser!!.uid + "/resumeImage")
         val riversRef: StorageReference = storageReference.child("images/" + randomkey)
-        riversRef.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
 
-            val userHasMap = HashMap<String, Any>()
-            userHasMap["imageUrl"] = imageUri
+        riversRef.putFile(imageUri).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Image Uploaded.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+                imgRef.setValue(imageUri.toString())
+
+                val userHasMap = HashMap<String, Any>()
+                userHasMap["resumeImage"] = imageUri.toString()
 
 
-            Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show()
-
-        }.addOnFailureListener {
-
-            Toast.makeText(applicationContext, "Failed To Upload", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "" + task.exception.toString(), Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
-    private fun LoadImage() {
-
-
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+

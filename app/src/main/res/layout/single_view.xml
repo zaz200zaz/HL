@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/condition"
         android:hint="状態"
         app:layout_constraintTop_toBottomOf="@id/name"
         android:layout_width="wrap_content"
