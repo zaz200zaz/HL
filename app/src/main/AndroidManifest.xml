@@ -22,7 +22,7 @@
         android:theme="@style/Theme.KotlinFrebase"
         tools:targetApi="31">
         <activity
-            android:name=".Resume_Upload"
+            android:name=".Resume"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

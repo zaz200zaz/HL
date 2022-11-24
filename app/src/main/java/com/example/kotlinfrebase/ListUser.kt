@@ -1,8 +1,9 @@
 package com.example.kotlinfrebase
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.util.AttributeSet
 
 import android.view.View
 import android.widget.Button
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.single_view.*
+import android.os.Bundle as Bundle1
 
 class ListUser : AppCompatActivity() {
 
@@ -28,16 +30,16 @@ class ListUser : AppCompatActivity() {
     private lateinit var userRecycleView: RecyclerView
     private lateinit var userArrayList: ArrayList<User>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle1?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-
+        Loadlist()
         userRecycleView = findViewById(R.id.recyclerView)
         userRecycleView.layoutManager = LinearLayoutManager(this)
         userRecycleView.setHasFixedSize(true)
 
         userArrayList = arrayListOf<User>()
-        Loadlist()
+
 
 
 
@@ -51,10 +53,21 @@ class ListUser : AppCompatActivity() {
 
 
         add.setOnClickListener(View.OnClickListener {
+
             startActivity(Intent(this, Personal_Page::class.java))
             finish()
         })
+        swiperefreshlayoutId.setOnRefreshListener {
+            userArrayList.removeAll(userArrayList)
+            Loadlist()
+            swiperefreshlayoutId.isRefreshing = false
+        }
+
+
+
     }
+
+
 
     private fun Loadlist() {
         mRef = FirebaseDatabase.getInstance().getReference("FaceToFacePick")

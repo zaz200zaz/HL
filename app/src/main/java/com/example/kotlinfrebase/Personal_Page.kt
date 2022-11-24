@@ -1,6 +1,7 @@
 package com.example.kotlinfrebase
 
 
+import android.app.Activity
 import android.content.Intent
 
 import android.widget.Button
@@ -10,14 +11,17 @@ import kotlinx.android.synthetic.main.return_bar.*
 import kotlinx.android.synthetic.main.return_bar.Return
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_personal_page.*
 
@@ -28,84 +32,81 @@ class Personal_Page : AppCompatActivity() {
     private lateinit var mRef2: DatabaseReference
     private lateinit var userArrayList:ArrayList<User>
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
 
-
+        val test = arrayOf("合格","不合格","未定")
         val resume:Button=findViewById(R.id.resume)
         val Return:ImageView=findViewById(R.id.Return)
+        var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
 
         resume.setOnClickListener {
-                startActivity(Intent(this,Resume::class.java))
+            startActivity(Intent(this,Resume::class.java))
         }
         Return.setOnClickListener{
             startActivity(Intent(this,ListUser::class.java))
         }
 
 
+        var data = intent.getStringExtra("name").toString().trim()
+        Log.d(TAG, "onCreate: " + data)
 
-
-
-
-        val test = arrayOf("合格","不合格","未定")
-        var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
-
-        resultOfFirstInterview.threshold = 0
-
-        resultOfFirstInterview.setAdapter(adapter)
-        resultOfFirstInterview.isFocusable = false
-
-        Loadlist(intent.getStringExtra("name").toString())
+        Loadlist(data)
 
         hozon.setOnClickListener(View.OnClickListener {
 
-            hozonData(intent.getStringExtra("name").toString())
+            hozonData(intent.getStringExtra("name").toString().trim())
+            startActivity(Intent(this,Personal_Page::class.java).putExtra("name",edtNameId.text.toString()))
+            finish()
         })
 
         resultOfFirstInterview.setOnClickListener{
-            val test = arrayOf("合格","不合格","未定")
-            var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
-
             resultOfFirstInterview.threshold = 0
-
             resultOfFirstInterview.setAdapter(adapter)
             resultOfFirstInterview.isFocusable = false
         }
+
         resultOfSecondInterview.setOnClickListener{
-            val test = arrayOf("合格","不合格","未定")
-            var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
-
             resultOfSecondInterview.threshold = 0
-
             resultOfSecondInterview.setAdapter(adapter)
             resultOfSecondInterview.isFocusable = false
         }
+
         resultOfKensyuu.setOnClickListener{
-            val test = arrayOf("合格","不合格","未定")
-            var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
-
             resultOfKensyuu.threshold = 0
-
             resultOfKensyuu.setAdapter(adapter)
             resultOfKensyuu.isFocusable = false
         }
 
-//        resultOfFirstInterview.setOnClickListener{
-//            val test = arrayOf("合格","不合格","未定")
-//            var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
-//
-//            resultOfFirstInterview.threshold = 0
-//
-//            resultOfFirstInterview.setAdapter(adapter)
-//            resultOfFirstInterview.isFocusable = false
-//        }
+        resultOfFirstInterview2.setOnClickListener{
+            resultOfFirstInterview.threshold = 0
+            resultOfFirstInterview.setAdapter(adapter)
+            resultOfFirstInterview2.isFocusable = false
+        }
+
+        resultOfSecondInterview2.setOnClickListener{
+
+            resultOfSecondInterview2.isFocusable = false
+        }
+
+        resultOfKensyuu2.setOnClickListener{
+            resultOfKensyuu.threshold = 0
+            resultOfKensyuu.setAdapter(adapter)
+            resultOfKensyuu2.isFocusable = false
+        }
+        personalID.setOnClickListener{
+
+            resultOfKensyuu2.isFocusable = false
+        }
+        hideKeyboard(this,resultOfKensyuu2)
+        hideKeyboard(this,resultOfFirstInterview2)
+        hideKeyboard(this,resultOfSecondInterview2)
+        hideKeyboard(this,resultOfFirstInterview)
+        hideKeyboard(this,resultOfKensyuu)
+        hideKeyboard(this,resultOfSecondInterview)
 
 
-//        firstInterviewCalendar.setText(intent.getStringExtra("name").toString())
 
     }
 
@@ -143,7 +144,7 @@ class Personal_Page : AppCompatActivity() {
                         val  user4= userSnapshot.getValue(User::class.java)!!.入社時間
                         val  user44= userSnapshot.getValue(User::class.java)!!.入社コメント
                         if (user.equals(name)){
-//                            firstInterviewCalendar.setText(user)
+                            edtNameId.setText(user)
 
                             resultOfFirstInterview.setText(user1?.let { checkResut(it) })
                             firstInterviewCalendar.setText(user11)
@@ -190,7 +191,7 @@ class Personal_Page : AppCompatActivity() {
 
                             val userHasMap = HashMap<String, Any>()
 
-                            userHasMap.put("名前",name)
+                            userHasMap.put("名前",edtNameId.text.toString().trim())
 
                             userHasMap.put("一次面接結果",resultOfFirstInterview.text.toString().trim())
                             userHasMap.put("一次面接時間",firstInterviewCalendar.text.toString().trim())
@@ -208,23 +209,25 @@ class Personal_Page : AppCompatActivity() {
                             userHasMap.put("入社コメント",comment.text.toString().trim())
 
 
-                            writeNewUser(
-                                name,
-                                resultOfFirstInterview.text.toString().trim(),
-                                firstInterviewCalendar.text.toString().trim(),
-                                commentOfFirstInterview.text.toString().trim(),
+                            FirebaseDatabase.getInstance().getReference("FaceToFacePick").child(e).updateChildren(userHasMap)
 
-                                resultOfSecondInterview.text.toString().trim(),
-                                secondInterviewCalendar.text.toString().trim(),
-                                commentOfSecondInterview.text.toString().trim(),
-
-                                resultOfKensyuu.text.toString().trim(),
-                                kensyuuCalendar.text.toString().trim(),
-                                commentOfKensyuu.text.toString().trim(),
-
-                                nyuusyaCalendar.text.toString().trim(),
-                                comment.text.toString().trim(),
-                                e)
+//                            writeNewUser(
+//                                edtNameId.text.toString().trim(),
+//                                resultOfFirstInterview.text.toString().trim(),
+//                                firstInterviewCalendar.text.toString().trim(),
+//                                commentOfFirstInterview.text.toString().trim(),
+//
+//                                resultOfSecondInterview.text.toString().trim(),
+//                                secondInterviewCalendar.text.toString().trim(),
+//                                commentOfSecondInterview.text.toString().trim(),
+//
+//                                resultOfKensyuu.text.toString().trim(),
+//                                kensyuuCalendar.text.toString().trim(),
+//                                commentOfKensyuu.text.toString().trim(),
+//
+//                                nyuusyaCalendar.text.toString().trim(),
+//                                comment.text.toString().trim(),
+//                                e)
                             break
                         }
 
@@ -233,13 +236,14 @@ class Personal_Page : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+//                Toast.makeText(this,"エラー："+error.message,Toast.LENGTH_LONG).show()
+                Log.d(TAG, "onCancelled: エラー："+error.message)
             }
         })
     }
     fun checkResut(result:String): String {
         if (result.isEmpty()){
-            return "結果選び"
+            return "未定"
         }
         return result
     }
@@ -251,5 +255,11 @@ class Personal_Page : AppCompatActivity() {
                      past: String) {
         val user = User(name, m1,m11,m111,m2,m22,m222,m3,m33,m333,m4,m44)
         FirebaseDatabase.getInstance().getReference("FaceToFacePick").child(past).setValue(user)
+    }
+
+    fun hideKeyboard(context: Context, view: View){
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
     }
 }

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import java.util.jar.Attributes
 
 
-class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.MyViewHolder> (){
+class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.MyViewHolder> (){
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -59,20 +59,23 @@ class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAda
 
     class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 
-        val name:TextView=itemView.findViewById(R.id.name)
-        val condition:TextView=itemView.findViewById(R.id.condition)
-
+        var name:TextView
+        var condition:TextView
 
         init {
+            name =itemView.findViewById(R.id.name)
+            condition = itemView.findViewById(R.id.condition)
             itemView.setOnClickListener{
 
-                itemView.context.startActivity(Intent(itemView.context,Personal_Page::class.java))
-
+                val position: Int = adapterPosition
+//                Toast.makeText(itemView.context, "youClick on "+ name.text.toString(),Toast.LENGTH_LONG).show()
+                var intern= Intent(itemView.context,Personal_Page::class.java)
+                intern.putExtra("name",name.text.toString())
+                itemView.context.startActivity(intern)
             }
         }
 
     }
 
 }
-
 

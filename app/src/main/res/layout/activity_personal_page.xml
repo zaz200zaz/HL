@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/personalID"
     tools:context=".Personal_Page"
     android:layout_height="match_parent">
     <ScrollView
@@ -28,6 +29,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:passwordToggleEnabled="false">
+
+                <EditText
+                    android:id="@+id/edtNameId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="面接者の名前"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
 
@@ -75,6 +92,7 @@
 
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="wrap_content"
+                        android:id="@+id/resultOfFirstInterview2"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center">
 
@@ -156,7 +174,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
 
-
+                        android:id="@+id/resultOfSecondInterview2"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -240,7 +258,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
 
-
+                        android:id="@+id/resultOfKensyuu2"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
