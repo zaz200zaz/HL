@@ -1,5 +1,6 @@
 package com.example.kotlinfrebase
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.MyViewHolder> (){
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
       val itemView=LayoutInflater.from(parent.context).inflate(R.layout.single_view,parent,false)
         return MyViewHolder(itemView)
@@ -51,7 +53,9 @@ class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAda
         init {
 
             itemView.setOnClickListener{
-
+                var intent = Intent(Intent(itemView.context,Personal_Page::class.java))
+                intent.putExtra("name",name.text.toString().trim())
+                itemView.context.startActivity(intent)
             }
         }
 
@@ -61,3 +65,5 @@ class MyAdapter(private val userlist:ArrayList<User>):RecyclerView.Adapter<MyAda
     }
 
 }
+
+

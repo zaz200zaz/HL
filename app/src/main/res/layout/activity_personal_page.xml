@@ -1,282 +1,360 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Personal_Page">
-    <include
-        layout="@layout/bb"
-        android:id="@+id/Bar"/>
-    <TextView
-        android:id="@+id/firstInterview"
-        app:layout_constraintTop_toBottomOf="@id/Bar"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="一次面接"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/firstInterviewCalendar"
-        app:layout_constraintTop_toBottomOf="@id/Bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="15dp"
-        android:hint="11月20日18時30分"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/resultOfFirstInterview"
+    tools:context=".Personal_Page"
+    android:layout_height="match_parent">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        app:layout_constraintTop_toBottomOf="@id/Bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="15dp"
-        android:hint="合格"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/commentOfFirstInterview"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/square_border"
-        app:layout_constraintTop_toBottomOf="@id/firstInterview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:textSize="15sp"
-        android:hint="コメントしてください"
-        android:textColor="@color/black"
-        android:padding="10dp"/>
-    <View
-        android:id="@+id/line1"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintStart_toStartOf="@id/commentOfFirstInterview"
-        app:layout_constraintEnd_toEndOf="@id/commentOfFirstInterview"
-        app:layout_constraintTop_toBottomOf="@id/commentOfFirstInterview"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-28dp">
 
-    <TextView
-        android:id="@+id/secondInterview"
-        app:layout_constraintTop_toBottomOf="@id/line1"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="二次面接"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/secondInterviewCalendar"
-        app:layout_constraintTop_toBottomOf="@id/line1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="15dp"
-        android:hint="11月27日18時30分"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/resultOfSecondInterview"
-        app:layout_constraintTop_toBottomOf="@id/line1"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="15dp"
-        android:hint="合格"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/commentOfSecondInterview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/square_border"
-        app:layout_constraintTop_toBottomOf="@id/secondInterview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:textSize="15sp"
-        android:hint="コメントしてください"
-        android:textColor="@color/black"
-        android:padding="10dp"/>
-    <View
-        android:id="@+id/line2"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintStart_toStartOf="@id/commentOfSecondInterview"
-        app:layout_constraintEnd_toEndOf="@id/commentOfSecondInterview"
-        app:layout_constraintTop_toBottomOf="@id/commentOfSecondInterview"
-        android:layout_marginTop="10dp"/>
 
-    <TextView
-        android:id="@+id/kensyuu"
-        app:layout_constraintTop_toBottomOf="@id/line2"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="研修"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/kensyuuCalendar"
-        app:layout_constraintTop_toBottomOf="@id/line2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="15dp"
-        android:hint="2022年12月1日"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/resultOfKensyuu"
-        app:layout_constraintTop_toBottomOf="@id/line2"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="15dp"
-        android:hint="合格"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/commentOfKensyuu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/square_border"
-        app:layout_constraintTop_toBottomOf="@id/kensyuu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:textSize="15sp"
-        android:hint="コメントしてください"
-        android:textColor="@color/black"
-        android:padding="10dp"/>
-    <View
-        android:id="@+id/line3"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintStart_toStartOf="@id/commentOfKensyuu"
-        app:layout_constraintEnd_toEndOf="@id/commentOfKensyuu"
-        app:layout_constraintTop_toBottomOf="@id/commentOfKensyuu"
-        android:layout_marginTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/nyuusya"
-        app:layout_constraintTop_toBottomOf="@id/line3"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="入社"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/nyuusyaCalendar"
-        app:layout_constraintTop_toBottomOf="@id/line3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="15dp"
-        android:hint="2023年3月1日"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="15sp"
-        android:padding="10dp"
-        android:background="@drawable/square_border"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            <include
+                android:id="@+id/Bar"
+                layout="@layout/bb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/square_border"
-        app:layout_constraintTop_toBottomOf="@id/nyuusya"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:textSize="15sp"
-        android:hint="コメントしてください"
-        android:textColor="@color/black"
-        android:padding="10dp"/>
+            <TextView
 
-    <Button
-        android:id="@+id/hozon"
-        android:text="保存"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_bg"
-        app:layout_constraintTop_toBottomOf="@id/comment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@android:color/darker_gray"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="一次面接"
+                android:textSize="21dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+
+                <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:passwordToggleEnabled="false">
+
+                    <EditText
+                        android:id="@+id/firstInterviewCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="日付と時間入力"
+                        android:inputType="datetime" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/resultOfFirstInterview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="none"
+                            android:text="結果選び" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:passwordToggleEnabled="false">
+
+                <EditText
+                    android:id="@+id/commentOfFirstInterview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_border"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="コメント"
+                    android:inputType="textPersonName"
+                    android:maxHeight="100dp"
+                    android:padding="5dp"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="25dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@android:color/darker_gray"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="二次面接"
+                android:textSize="21dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+
+                <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:passwordToggleEnabled="false">
+
+                    <EditText
+                        android:id="@+id/secondInterviewCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="日付と時間入力"
+                        android:inputType="datetime" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/resultOfSecondInterview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="none"
+                            android:text="結果選び" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:passwordToggleEnabled="false">
+
+                <EditText
+                    android:id="@+id/commentOfSecondInterview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_border"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="コメント"
+                    android:inputType="textPersonName"
+                    android:maxHeight="100dp"
+                    android:padding="5dp"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="25dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/kensyuu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@android:color/darker_gray"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="研修"
+                android:textSize="21dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+
+                <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:passwordToggleEnabled="false">
+
+                    <EditText
+                        android:id="@+id/kensyuuCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="日付と時間入力"
+                        android:inputType="datetime" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/resultOfKensyuu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="none"
+                            android:text="結果選び" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:passwordToggleEnabled="false">
+
+                <EditText
+                    android:id="@+id/commentOfKensyuu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_border"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="コメント"
+                    android:inputType="textPersonName"
+                    android:maxHeight="100dp"
+                    android:padding="5dp"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="25dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/nyuusya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@android:color/darker_gray"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="入社"
+                android:textSize="21dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+
+                <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:passwordToggleEnabled="false">
+
+                    <EditText
+                        android:id="@+id/nyuusyaCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="日付と時間入力"
+                        android:inputType="datetime" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:passwordToggleEnabled="false">
+
+                <EditText
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_border"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="コメント"
+                    android:inputType="textPersonName"
+                    android:maxHeight="100dp"
+                    android:padding="5dp"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="25dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:layout_marginBottom="20dp"
+                android:id="@+id/hozon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_bg"
+                android:text="保存" />
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
