@@ -55,24 +55,14 @@ class FaceToFacePicker : AppCompatActivity() {
             }
         })
 
-
-
-        ////////////////////////////
-
-
-
-
-                refUsers = FirebaseDatabase.getInstance().reference.child("FaceToFacePick")
+        refUsers = FirebaseDatabase.getInstance().reference.child("FaceToFacePick")
         refUsers.addListenerForSingleValueEvent(object : ValueEventListener{
 
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot!!.children
                 children.forEach {
-//                    var s:String = it.getValue(User::class.java)!!.getName()
-//                    Log.d(TAG, "onDataChange: " + s)
-//                    println("name :"+ it.getValue(User::class.java)!!.getName())
-//                    textView2.setText(textView2.text.toString()+","+s)
+
                 }
             }
 

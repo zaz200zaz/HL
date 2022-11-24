@@ -5,39 +5,73 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
-
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.aa.*
 
 import android.widget.EditText
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintSet.Layout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.single_view.*
 
 class ListUser : AppCompatActivity() {
 
-    private lateinit var mAuth: FirebaseAuth
     private lateinit var mRef: DatabaseReference
     private lateinit var mUser: FirebaseUser
-    val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
-    var name=findViewById<EditText>(R.id.name)
-    var condition=findViewById<TextView>(R.id.condition)
-
-
-
-
+    private lateinit var userRecycleView: RecyclerView
+    private lateinit var userArrayList: ArrayList<User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+
+        userRecycleView = findViewById(R.id.recyclerView)
+        userRecycleView.layoutManager = LinearLayoutManager(this)
+        userRecycleView.setHasFixedSize(true)
+
+        userArrayList = arrayListOf<User>()
+        Loadlist()
+
+
+
         btnLogOut.setOnClickListener(View.OnClickListener {
 
             FirebaseAuth.getInstance().signOut()
-            Toast.makeText(this, "ログイン成功", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this,MainActivity::class.java))
+            Toast.makeText(this, "ログアウト成功", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
+        })
+
+
+        add.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, Personal_Page::class.java))
+            finish()
+        })
+    }
+
+    private fun Loadlist() {
+        mRef = FirebaseDatabase.getInstance().getReference("FaceToFacePick")
+        mRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+                        val user = userSnapshot.getValue(User::class.java)
+                        userArrayList.add(user!!)
+                    }
+                    userRecycleView.adapter = MyAdapter(userArrayList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
         })
     }
 }
