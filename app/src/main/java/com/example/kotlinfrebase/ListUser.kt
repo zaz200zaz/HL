@@ -53,9 +53,7 @@ class ListUser : AppCompatActivity() {
 
 
         add.setOnClickListener(View.OnClickListener {
-
-            startActivity(Intent(this, Personal_Page::class.java))
-            finish()
+            startActivity(Intent(this, FaceToFacePicker::class.java))
         })
         swiperefreshlayoutId.setOnRefreshListener {
             userArrayList.removeAll(userArrayList)
