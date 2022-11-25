@@ -2,6 +2,7 @@ package com.example.kotlinfrebase
 
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 
 import android.widget.Button
@@ -24,6 +25,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_personal_page.*
+import kotlinx.android.synthetic.main.result.*
 
 
 class Personal_Page : AppCompatActivity() {
@@ -36,10 +38,10 @@ class Personal_Page : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
 
-        val test = arrayOf("合格","不合格","未定")
+//        val test = arrayOf("合格","不合格","未定")
         val resume:Button=findViewById(R.id.resume)
         val Return:ImageView=findViewById(R.id.Return)
-        var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
+//        var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
 
         resume.setOnClickListener {
             startActivity(Intent(this,Resume::class.java))
@@ -60,53 +62,122 @@ class Personal_Page : AppCompatActivity() {
             startActivity(Intent(this,Personal_Page::class.java).putExtra("name",edtNameId.text.toString()))
             finish()
         })
+        textClick.setOnClickListener{
 
-        resultOfFirstInterview.setOnClickListener{
-            resultOfFirstInterview.threshold = 0
-            resultOfFirstInterview.setAdapter(adapter)
-            resultOfFirstInterview.isFocusable = false
+
+            val dialog = Dialog(this)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.result)
+
+            dialog.button2.setOnClickListener(View.OnClickListener {
+                resultOfFirstInterview.setText(dialog.button2.text.toString())
+                dialog.dismiss()
+            })
+            dialog.button3.setOnClickListener{
+                resultOfFirstInterview.setText(dialog.button3.text.toString())
+                dialog.dismiss()
+            }
+            dialog.button4.setOnClickListener{
+                resultOfFirstInterview.setText(dialog.button4.text.toString())
+                dialog.dismiss()
+            }
+
+
+            dialog.show()
         }
 
-        resultOfSecondInterview.setOnClickListener{
-            resultOfSecondInterview.threshold = 0
-            resultOfSecondInterview.setAdapter(adapter)
-            resultOfSecondInterview.isFocusable = false
+        textClick2.setOnClickListener{
+
+
+            val dialog = Dialog(this)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.result)
+
+            dialog.button2.setOnClickListener(View.OnClickListener {
+                resultOfSecondInterview.setText(dialog.button2.text.toString())
+                dialog.dismiss()
+            })
+            dialog.button3.setOnClickListener{
+                resultOfSecondInterview.setText(dialog.button3.text.toString())
+                dialog.dismiss()
+            }
+            dialog.button4.setOnClickListener{
+                resultOfSecondInterview.setText(dialog.button4.text.toString())
+                dialog.dismiss()
+            }
+
+
+            dialog.show()
         }
 
-        resultOfKensyuu.setOnClickListener{
-            resultOfKensyuu.threshold = 0
-            resultOfKensyuu.setAdapter(adapter)
-            resultOfKensyuu.isFocusable = false
+        textClick3.setOnClickListener{
+
+
+            val dialog = Dialog(this)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.result)
+
+            dialog.button2.setOnClickListener(View.OnClickListener {
+                resultOfKensyuu.setText(dialog.button2.text.toString())
+                dialog.dismiss()
+            })
+            dialog.button3.setOnClickListener{
+                resultOfKensyuu.setText(dialog.button3.text.toString())
+                dialog.dismiss()
+            }
+            dialog.button4.setOnClickListener{
+                resultOfKensyuu.setText(dialog.button4.text.toString())
+                dialog.dismiss()
+            }
+
+
+            dialog.show()
         }
 
-        resultOfFirstInterview2.setOnClickListener{
-            resultOfFirstInterview.threshold = 0
-            resultOfFirstInterview.setAdapter(adapter)
-            resultOfFirstInterview2.isFocusable = false
-        }
-
-        resultOfSecondInterview2.setOnClickListener{
-
-            resultOfSecondInterview2.isFocusable = false
-        }
-
-        resultOfKensyuu2.setOnClickListener{
-            resultOfKensyuu.threshold = 0
-            resultOfKensyuu.setAdapter(adapter)
-            resultOfKensyuu2.isFocusable = false
-        }
-        personalID.setOnClickListener{
-
-            resultOfKensyuu2.isFocusable = false
-        }
-        hideKeyboard(this,resultOfKensyuu2)
-        hideKeyboard(this,resultOfFirstInterview2)
-        hideKeyboard(this,resultOfSecondInterview2)
-        hideKeyboard(this,resultOfFirstInterview)
-        hideKeyboard(this,resultOfKensyuu)
-        hideKeyboard(this,resultOfSecondInterview)
-
-
+//        resultOfFirstInterview.setOnClickListener{
+//            resultOfFirstInterview.threshold = 0
+//            resultOfFirstInterview.setAdapter(adapter)
+//            resultOfFirstInterview.isFocusable = false
+//        }
+//
+//        resultOfSecondInterview.setOnClickListener{
+//            resultOfSecondInterview.threshold = 0
+//            resultOfSecondInterview.setAdapter(adapter)
+//            resultOfSecondInterview.isFocusable = false
+//        }
+//
+//        resultOfKensyuu.setOnClickListener{
+//            resultOfKensyuu.threshold = 0
+//            resultOfKensyuu.setAdapter(adapter)
+//            resultOfKensyuu.isFocusable = false
+//        }
+//
+//        resultOfFirstInterview2.setOnClickListener{
+//            resultOfFirstInterview.threshold = 0
+//            resultOfFirstInterview.setAdapter(adapter)
+//            resultOfFirstInterview2.isFocusable = false
+//        }
+//
+//        resultOfSecondInterview2.setOnClickListener{
+//
+//            resultOfSecondInterview2.isFocusable = false
+//        }
+//
+//        resultOfKensyuu2.setOnClickListener{
+//            resultOfKensyuu.threshold = 0
+//            resultOfKensyuu.setAdapter(adapter)
+//            resultOfKensyuu2.isFocusable = false
+//        }
+//        personalID.setOnClickListener{
+//
+//            resultOfKensyuu2.isFocusable = false
+//        }
+//        hideKeyboard(this,resultOfKensyuu2)
+//        hideKeyboard(this,resultOfFirstInterview2)
+//        hideKeyboard(this,resultOfSecondInterview2)
+//        hideKeyboard(this,resultOfFirstInterview)
+//        hideKeyboard(this,resultOfKensyuu)
+//        hideKeyboard(this,resultOfSecondInterview)
 
     }
 
@@ -211,23 +282,7 @@ class Personal_Page : AppCompatActivity() {
 
                             FirebaseDatabase.getInstance().getReference("FaceToFacePick").child(e).updateChildren(userHasMap)
 
-//                            writeNewUser(
-//                                edtNameId.text.toString().trim(),
-//                                resultOfFirstInterview.text.toString().trim(),
-//                                firstInterviewCalendar.text.toString().trim(),
-//                                commentOfFirstInterview.text.toString().trim(),
-//
-//                                resultOfSecondInterview.text.toString().trim(),
-//                                secondInterviewCalendar.text.toString().trim(),
-//                                commentOfSecondInterview.text.toString().trim(),
-//
-//                                resultOfKensyuu.text.toString().trim(),
-//                                kensyuuCalendar.text.toString().trim(),
-//                                commentOfKensyuu.text.toString().trim(),
-//
-//                                nyuusyaCalendar.text.toString().trim(),
-//                                comment.text.toString().trim(),
-//                                e)
+
                             break
                         }
 
