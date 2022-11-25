@@ -31,7 +31,7 @@ class Resume:AppCompatActivity() {
             startActivity(Intent(this, Personal_Page::class.java))
         }
 
-        resumeImage.setOnClickListener {
+        resumeImags.setOnClickListener {
 
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.setType("image/*")
@@ -45,7 +45,7 @@ class Resume:AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data!!.getData()!! != null) {
             imageUri = data!!.getData()!!
-            resumeImage.setImageURI(imageUri)
+            resumeImags.setImageURI(imageUri)
             save.setOnClickListener {
                 UpLoadImg()
 
@@ -88,7 +88,7 @@ class Resume:AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()){
                         Picasso.get().load(dataSnapshot.child("resumeImage").getValue().toString())
-                            .into(resumeImage)
+                            .into(resumeImags)
                     }
                 }
 

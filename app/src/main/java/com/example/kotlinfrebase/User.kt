@@ -16,4 +16,7 @@ data class User(var 名前:String?=null,
                 var 研修コメント:String?=null,
 
                 var 入社時間:String?=null,
-                var 入社コメント:String?=null)
+                var 入社コメント:String?=null,
+                var resumeImage:String?=null
+
+)

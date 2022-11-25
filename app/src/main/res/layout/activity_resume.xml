@@ -10,7 +10,7 @@
         layout="@layout/return_bar"/>
 
     <ImageView
-        android:id="@+id/resumeImage"
+        android:id="@+id/resumeImags"
         app:layout_constraintTop_toBottomOf="@id/aa"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="30dp"
@@ -23,17 +23,17 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/resumeImage"
-        app:layout_constraintStart_toStartOf="@id/resumeImage"
+
         android:textSize="12sp"
         android:textColor="@color/grey"
-        android:text="サンプル写真をクリックして、履歴書をアップロードしてください"/>
+        android:text="サンプル写真をクリックして、履歴書をアップロードしてください"
+        tools:ignore="MissingConstraints" />
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_bg"
-        app:layout_constraintTop_toBottomOf="@id/resumeImage"
+        app:layout_constraintTop_toBottomOf="@id/resumeImags"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="15dp"

@@ -1,26 +1,22 @@
 package com.example.kotlinfrebase
 
-import android.content.Context
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import android.util.AttributeSet
+
 
 import android.view.View
-import android.widget.Button
+
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.aa.*
 
-import android.widget.EditText
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintSet.Layout
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_list.*
-import kotlinx.android.synthetic.main.single_view.*
 import android.os.Bundle as Bundle1
 
 class ListUser : AppCompatActivity() {
@@ -37,11 +33,7 @@ class ListUser : AppCompatActivity() {
         userRecycleView = findViewById(R.id.recyclerView)
         userRecycleView.layoutManager = LinearLayoutManager(this)
         userRecycleView.setHasFixedSize(true)
-
         userArrayList = arrayListOf<User>()
-
-
-
 
         btnLogOut.setOnClickListener(View.OnClickListener {
 
@@ -53,19 +45,16 @@ class ListUser : AppCompatActivity() {
 
 
         add.setOnClickListener(View.OnClickListener {
+
             startActivity(Intent(this, FaceToFacePicker::class.java))
+
         })
         swiperefreshlayoutId.setOnRefreshListener {
             userArrayList.removeAll(userArrayList)
             Loadlist()
             swiperefreshlayoutId.isRefreshing = false
         }
-
-
-
     }
-
-
 
     private fun Loadlist() {
         mRef = FirebaseDatabase.getInstance().getReference("FaceToFacePick")
