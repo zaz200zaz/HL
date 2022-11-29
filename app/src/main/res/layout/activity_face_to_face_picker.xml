@@ -218,21 +218,21 @@
                 android:inputType="textPersonName" />
         </LinearLayout>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="写真を選んでください"
-            android:textSize="25dp"
-            android:textColor="@color/black"/>
+<!--        <TextView-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="写真を選んでください"-->
+<!--            android:textSize="25dp"-->
+<!--            android:textColor="@color/black"/>-->
 
-        <ImageView
-            android:id="@+id/resumeImage"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:src="@drawable/resume1"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/resumeImage"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="500dp"-->
+<!--            android:src="@drawable/resume1"/>-->
 
         <Button
             android:id="@+id/button"

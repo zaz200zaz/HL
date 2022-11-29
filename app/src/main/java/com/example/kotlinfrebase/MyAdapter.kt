@@ -31,6 +31,7 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
         val currentitem = userlist[position]
 
         holder.name.text = currentitem.名前
+        holder.email.text = currentitem.メール
 
         if (currentitem.研修結果.isNullOrEmpty() && currentitem.二次面接結果.isNullOrEmpty() && currentitem.一次面接結果.isNullOrEmpty()) {
 
@@ -61,16 +62,20 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
 
         var name:TextView
         var condition:TextView
+        var email:TextView
 
         init {
             name =itemView.findViewById(R.id.name)
             condition = itemView.findViewById(R.id.condition)
+            email = itemView.findViewById(R.id.singViewEmaiId)
             itemView.setOnClickListener{
 
                 val position: Int = adapterPosition
-//                Toast.makeText(itemView.context, "youClick on "+ name.text.toString(),Toast.LENGTH_LONG).show()
                 var intern= Intent(itemView.context,Personal_Page::class.java)
-                intern.putExtra("name",name.text.toString())
+
+//                intern.putExtra("singViewNameData",name.text.toString())
+                intern.putExtra("singViewEmailData",email.text.toString())
+
                 itemView.context.startActivity(intern)
             }
         }

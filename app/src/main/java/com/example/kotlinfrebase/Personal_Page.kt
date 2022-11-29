@@ -1,7 +1,6 @@
 package com.example.kotlinfrebase
 
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 
@@ -12,18 +11,16 @@ import kotlinx.android.synthetic.main.return_bar.*
 import kotlinx.android.synthetic.main.return_bar.Return
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.Adapter
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.core.view.isGone
+import com.bumptech.glide.Glide
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_personal_page.*
 import kotlinx.android.synthetic.main.result.*
 
@@ -33,37 +30,63 @@ class Personal_Page : AppCompatActivity() {
     private lateinit var mRef: DatabaseReference
     private lateinit var mRef2: DatabaseReference
     private lateinit var userArrayList:ArrayList<User>
+    val storageReference = FirebaseStorage.getInstance().getReference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_page)
 
-//        val test = arrayOf("合格","不合格","未定")
-        val resume:Button=findViewById(R.id.resume)
+        Loadlist(intent.getStringExtra("Personal_Page_Email_Data").toString().trim())
         val Return:ImageView=findViewById(R.id.Return)
-//        var adapter = ArrayAdapter(this,R.layout.drop_dow_item,test)
 
-        resume.setOnClickListener {
-            startActivity(Intent(this,Resume::class.java))
-        }
-        Return.setOnClickListener{
+        //chuyen qua chon anh 履歴書写真
+        imageChonAnh()
+        //ListUser戻る
+        back(Return)
+        //chay lay ket qua sau khi thay doi du lieu
+        var dataString:String =intent.getStringExtra("singViewEmailData").toString().trim()
+        Loadlist(dataString)
+        // lam moi du lieu
+        thayDoiVaLamMoiDuLieu()
+        //hien thi bang ket qua
+        hienThiBangKetQua()
+    }
+
+    private fun back(Return: ImageView) {
+        Return.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this,ListUser::class.java))
+        })
+    }
+
+    private fun imageChonAnh() {
+        resume.setOnClickListener {
+            var intern =Intent(this,Resume::class.java)
+            var data:String =edtEmailId.text.toString()
+            intern.putExtra("Personal_Page_Email_Data",edtEmailId.text.toString())
+            intern.putExtra("Personal_Page_Image_Data",imageURl.text.toString())
+            startActivity(intern)
         }
+        img.setOnClickListener {
+            var intern =Intent(this,Resume::class.java)
+            var data:String =edtEmailId.text.toString()
+            intern.putExtra("Personal_Page_Email_Data",edtEmailId.text.toString())
+            intern.putExtra("Personal_Page_Image_Data",imageURl.text.toString())
+            startActivity(intern)
+        }
+    }
 
-
-        var data = intent.getStringExtra("name").toString().trim()
-        Log.d(TAG, "onCreate: " + data)
-
-        Loadlist(data)
-
+    private fun thayDoiVaLamMoiDuLieu() {
         hozon.setOnClickListener(View.OnClickListener {
 
-            hozonData(intent.getStringExtra("name").toString().trim())
-            startActivity(Intent(this,Personal_Page::class.java).putExtra("name",edtNameId.text.toString()))
-            finish()
-        })
-        textClick.setOnClickListener{
+            hozonData(intent.getStringExtra("singViewEmailData").toString().trim())
+            startActivity(Intent(this,Personal_Page::class.java).putExtra("Personal_Page_Email_Data",edtEmailId.text.toString()))
+            Toast.makeText(this,"データ更新成功",Toast.LENGTH_LONG).show()
 
+        })
+    }
+
+    private fun hienThiBangKetQua() {
+        textClick.setOnClickListener{
 
             val dialog = Dialog(this)
             dialog.setCancelable(false)
@@ -133,52 +156,6 @@ class Personal_Page : AppCompatActivity() {
 
             dialog.show()
         }
-
-//        resultOfFirstInterview.setOnClickListener{
-//            resultOfFirstInterview.threshold = 0
-//            resultOfFirstInterview.setAdapter(adapter)
-//            resultOfFirstInterview.isFocusable = false
-//        }
-//
-//        resultOfSecondInterview.setOnClickListener{
-//            resultOfSecondInterview.threshold = 0
-//            resultOfSecondInterview.setAdapter(adapter)
-//            resultOfSecondInterview.isFocusable = false
-//        }
-//
-//        resultOfKensyuu.setOnClickListener{
-//            resultOfKensyuu.threshold = 0
-//            resultOfKensyuu.setAdapter(adapter)
-//            resultOfKensyuu.isFocusable = false
-//        }
-//
-//        resultOfFirstInterview2.setOnClickListener{
-//            resultOfFirstInterview.threshold = 0
-//            resultOfFirstInterview.setAdapter(adapter)
-//            resultOfFirstInterview2.isFocusable = false
-//        }
-//
-//        resultOfSecondInterview2.setOnClickListener{
-//
-//            resultOfSecondInterview2.isFocusable = false
-//        }
-//
-//        resultOfKensyuu2.setOnClickListener{
-//            resultOfKensyuu.threshold = 0
-//            resultOfKensyuu.setAdapter(adapter)
-//            resultOfKensyuu2.isFocusable = false
-//        }
-//        personalID.setOnClickListener{
-//
-//            resultOfKensyuu2.isFocusable = false
-//        }
-//        hideKeyboard(this,resultOfKensyuu2)
-//        hideKeyboard(this,resultOfFirstInterview2)
-//        hideKeyboard(this,resultOfSecondInterview2)
-//        hideKeyboard(this,resultOfFirstInterview)
-//        hideKeyboard(this,resultOfKensyuu)
-//        hideKeyboard(this,resultOfSecondInterview)
-
     }
 
 
@@ -188,50 +165,71 @@ class Personal_Page : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for (userSnapshot in snapshot.children){
-                        var f = userSnapshot.children.toString()
+                        println("test"+userSnapshot)
+
+                        val  userEmail= userSnapshot.getValue(User::class.java)!!.メール
+
+                        println("test2"+userEmail)
+                        println("test2"+name)
+                        if (userEmail.toString().trim().equals(name.trim())){
+                            println("test2"+userSnapshot)
+                            val  user= userSnapshot.getValue(User::class.java)!!.名前
+                            val  user1= userSnapshot.getValue(User::class.java)!!.一次面接結果
+                            val  user11= userSnapshot.getValue(User::class.java)!!.一次面接時間
+                            val  user111= userSnapshot.getValue(User::class.java)!!.一次面接コメント
+
+                            val  user2= userSnapshot.getValue(User::class.java)!!.二次面接結果
+                            val  user22= userSnapshot.getValue(User::class.java)!!.二次面接時間
+                            val  user222= userSnapshot.getValue(User::class.java)!!.二次面接コメント
+
+                            val  user3= userSnapshot.getValue(User::class.java)!!.研修結果
+                            val  user33= userSnapshot.getValue(User::class.java)!!.研修時間
+                            val  user333= userSnapshot.getValue(User::class.java)!!.研修コメント
+
+                            val  user4= userSnapshot.getValue(User::class.java)!!.入社時間
+                            val  user44= userSnapshot.getValue(User::class.java)!!.入社コメント
+                            val  user444= userSnapshot.getValue(User::class.java)!!.resumeImage
 
 
-                        for (i in userSnapshot.ref.toString().split("/")){   //Listなので直接for文で回せる
-                            println(i)
-                            Log.d(TAG, "onDataChange1: "+i)
-                        }
-
-                        val (a,b,c,d,e) = userSnapshot.ref.toString().split("/")
-                        Log.d(TAG, "onDataChange1: "+e)
-
-                        val  user= userSnapshot.getValue(User::class.java)!!.名前
-                        val  user1= userSnapshot.getValue(User::class.java)!!.一次面接結果
-                        val  user11= userSnapshot.getValue(User::class.java)!!.一次面接時間
-                        val  user111= userSnapshot.getValue(User::class.java)!!.一次面接コメント
-
-                        val  user2= userSnapshot.getValue(User::class.java)!!.二次面接結果
-                        val  user22= userSnapshot.getValue(User::class.java)!!.二次面接時間
-                        val  user222= userSnapshot.getValue(User::class.java)!!.二次面接コメント
-
-                        val  user3= userSnapshot.getValue(User::class.java)!!.研修結果
-                        val  user33= userSnapshot.getValue(User::class.java)!!.研修時間
-                        val  user333= userSnapshot.getValue(User::class.java)!!.研修コメント
-
-                        val  user4= userSnapshot.getValue(User::class.java)!!.入社時間
-                        val  user44= userSnapshot.getValue(User::class.java)!!.入社コメント
-                        if (user.equals(name)){
                             edtNameId.setText(user)
+                            edtEmailId.setText(userEmail)
 
-                            resultOfFirstInterview.setText(user1?.let { checkResut(it) })
+                            if (user1 != "") {
+                                    resultOfFirstInterview.setText(user1)
+                            }else{
+                                resultOfFirstInterview.isGone
+                                resultOfFirstInterview2.visibility
+                            }
                             firstInterviewCalendar.setText(user11)
                             commentOfFirstInterview.setText(user111)
 
-                            resultOfSecondInterview.setText(user2?.let { checkResut(it) })
+                            if (user2 != "") {
+                                resultOfSecondInterview.setText(user2)
+                            }else{
+                                resultOfSecondInterview.isGone
+                                resultOfSecondInterview2.visibility
+                            }
                             secondInterviewCalendar.setText(user22)
                             commentOfSecondInterview.setText(user222)
 
-                            resultOfKensyuu.setText(user3?.let { checkResut(it) })
+                            if (user3 !="") {
+                                resultOfKensyuu.setText(user3)
+                            }else{
+                                resultOfKensyuu.isGone
+                                resultOfKensyuu2.visibility
+                            }
                             kensyuuCalendar.setText(user33)
                             commentOfKensyuu.setText(user333)
 
                             nyuusyaCalendar.setText(user4)
                             comment.setText(user44)
+//                            var testImage:ImageView = findViewById(com.google.firebase.database.R.id.)
+                            if (user444 !=""){
+                                imageURl.setText(user444)
+                                Glide.with(applicationContext).load(user444).into(img)
+                            }else{
 
+                            }
 
                             break
                         }
@@ -247,22 +245,23 @@ class Personal_Page : AppCompatActivity() {
         })
     }
 
-    private fun hozonData(name:String) {
+    private fun hozonData(email:String) {
         mRef= FirebaseDatabase.getInstance().getReference("FaceToFacePick")
         mRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for (userSnapshot in snapshot.children){
 
-                        val  user= userSnapshot.getValue(User::class.java)!!.名前
+                        val  userEmail= userSnapshot.getValue(User::class.java)!!.メール
 
                         val (a,b,c,d,e) = userSnapshot.ref.toString().split("/")
                         Log.d(TAG, "onDataChange1: "+e)
-                        if (user.equals(name)){
+                        if (userEmail.equals(email)){
 
                             val userHasMap = HashMap<String, Any>()
 
                             userHasMap.put("名前",edtNameId.text.toString().trim())
+                            userHasMap.put("メール",edtEmailId.text.toString().trim())
 
                             userHasMap.put("一次面接結果",resultOfFirstInterview.text.toString().trim())
                             userHasMap.put("一次面接時間",firstInterviewCalendar.text.toString().trim())
@@ -278,7 +277,7 @@ class Personal_Page : AppCompatActivity() {
 
                             userHasMap.put("入社時間",nyuusyaCalendar.text.toString().trim())
                             userHasMap.put("入社コメント",comment.text.toString().trim())
-
+                            userHasMap.put("resumeImage",imageURl.text.toString().trim())
 
                             FirebaseDatabase.getInstance().getReference("FaceToFacePick").child(e).updateChildren(userHasMap)
 
@@ -291,30 +290,8 @@ class Personal_Page : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-//                Toast.makeText(this,"エラー："+error.message,Toast.LENGTH_LONG).show()
                 Log.d(TAG, "onCancelled: エラー："+error.message)
             }
         })
-    }
-    fun checkResut(result:String): String {
-        if (result.isEmpty()){
-            return "未定"
-        }
-        return result
-    }
-    fun writeNewUser(name: String,
-                     m1: String,m11: String,m111: String,
-                     m2: String,m22: String,m222: String,
-                     m3: String,m33: String,m333: String,
-                     m4: String,m44: String,
-                     past: String) {
-        val user = User(name, m1,m11,m111,m2,m22,m222,m3,m33,m333,m4,m44)
-        FirebaseDatabase.getInstance().getReference("FaceToFacePick").child(past).setValue(user)
-    }
-
-    fun hideKeyboard(context: Context, view: View){
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-
     }
 }
