@@ -29,11 +29,12 @@ class ListUser : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle1?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+
         Loadlist()
         userRecycleView = findViewById(R.id.recyclerView)
         userRecycleView.layoutManager = LinearLayoutManager(this)
         userRecycleView.setHasFixedSize(true)
-        userArrayList = arrayListOf<User>()
+
 
         btnLogOut.setOnClickListener(View.OnClickListener {
 
@@ -50,15 +51,18 @@ class ListUser : AppCompatActivity() {
 
         })
         swiperefreshlayoutId.setOnRefreshListener {
-            userArrayList.removeAll(userArrayList)
             Loadlist()
             swiperefreshlayoutId.isRefreshing = false
         }
     }
 
     private fun Loadlist() {
+
+        userArrayList = arrayListOf<User>()
+        userArrayList.clear()
+
         mRef = FirebaseDatabase.getInstance().getReference("FaceToFacePick")
-        mRef.addValueEventListener(object : ValueEventListener {
+        mRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (userSnapshot in snapshot.children) {

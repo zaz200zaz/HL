@@ -1,5 +1,6 @@
 package com.example.kotlinfrebase
 
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_face_to_face_picker.*
 import kotlinx.android.synthetic.main.activity_face_to_face_picker.kensyuu
 import kotlinx.android.synthetic.main.activity_personal_page.*
 import kotlinx.android.synthetic.main.activity_resume.*
+import kotlinx.android.synthetic.main.result.*
 import java.util.UUID
 
 class FaceToFacePicker : AppCompatActivity() {
@@ -34,6 +36,7 @@ class FaceToFacePicker : AppCompatActivity() {
         khoiTao()
         //面接者の登録
         toroku()
+        hienThiBangKetQua()
     }
 
     private fun khoiTao() {
@@ -77,5 +80,77 @@ class FaceToFacePicker : AppCompatActivity() {
             }
         }
 
+    }
+    private fun hienThiBangKetQua() {
+        x1k.setOnClickListener{
+
+            val dialog = Dialog(this)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.result)
+
+            dialog.button2.setOnClickListener(View.OnClickListener {
+                x1k.setText(dialog.button2.text.toString())
+                dialog.dismiss()
+            })
+            dialog.button3.setOnClickListener{
+                x1k.setText(dialog.button3.text.toString())
+                dialog.dismiss()
+            }
+            dialog.button4.setOnClickListener{
+                x1k.setText(dialog.button4.text.toString())
+                dialog.dismiss()
+            }
+
+
+            dialog.show()
+        }
+
+        x2k.setOnClickListener{
+
+
+            val dialog = Dialog(this)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.result)
+
+            dialog.button2.setOnClickListener(View.OnClickListener {
+                x2k.setText(dialog.button2.text.toString())
+                dialog.dismiss()
+            })
+            dialog.button3.setOnClickListener{
+                x2k.setText(dialog.button3.text.toString())
+                dialog.dismiss()
+            }
+            dialog.button4.setOnClickListener{
+                x2k.setText(dialog.button4.text.toString())
+                dialog.dismiss()
+            }
+
+
+            dialog.show()
+        }
+
+        x3k.setOnClickListener{
+
+
+            val dialog = Dialog(this)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.result)
+
+            dialog.button2.setOnClickListener(View.OnClickListener {
+                x3k.setText(dialog.button2.text.toString())
+                dialog.dismiss()
+            })
+            dialog.button3.setOnClickListener{
+                x3k.setText(dialog.button3.text.toString())
+                dialog.dismiss()
+            }
+            dialog.button4.setOnClickListener{
+                x3k.setText(dialog.button4.text.toString())
+                dialog.dismiss()
+            }
+
+
+            dialog.show()
+        }
     }
 }

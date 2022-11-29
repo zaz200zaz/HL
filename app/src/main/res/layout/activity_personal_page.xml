@@ -64,7 +64,7 @@
                     android:ems="10"
                     android:gravity="center"
                     android:hint="面接者のメール"
-                    android:inputType="textPersonName" />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

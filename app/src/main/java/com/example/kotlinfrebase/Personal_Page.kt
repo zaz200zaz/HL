@@ -44,7 +44,7 @@ class Personal_Page : AppCompatActivity() {
         //ListUser戻る
         back(Return)
         //chay lay ket qua sau khi thay doi du lieu
-        var dataString:String =intent.getStringExtra("singViewEmailData").toString().trim()
+        var dataString:String =intent.getStringExtra("Personal_Page_Email_Data").toString().trim()
         Loadlist(dataString)
         // lam moi du lieu
         thayDoiVaLamMoiDuLieu()
@@ -55,6 +55,7 @@ class Personal_Page : AppCompatActivity() {
     private fun back(Return: ImageView) {
         Return.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this,ListUser::class.java))
+            finish()
         })
     }
 

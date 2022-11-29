@@ -74,7 +74,7 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
                 var intern= Intent(itemView.context,Personal_Page::class.java)
 
 //                intern.putExtra("singViewNameData",name.text.toString())
-                intern.putExtra("singViewEmailData",email.text.toString())
+                intern.putExtra("Personal_Page_Email_Data",email.text.toString())
 
                 itemView.context.startActivity(intern)
             }
