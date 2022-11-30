@@ -32,14 +32,34 @@ class ListUser : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        //userArrayList
+        addList()
+        //データ初期設定
+        dataInit()
+        //ログアウト
+        logOut()
+        //面接者追加
+        Add()
+        //画面をドラッグする ...
+        swiperefresh()
+    }
 
-        Loadlist()
-        userRecycleView = findViewById(R.id.recyclerView)
+    private fun swiperefresh() {
+        swiperefreshlayoutId.setOnRefreshListener {
+            addList()
+            swiperefreshlayoutId.isRefreshing = false
+        }
+    }
 
-        userRecycleView.layoutManager = LinearLayoutManager(this)
-        userRecycleView.setHasFixedSize(true)
+    private fun Add() {
+        add.setOnClickListener(View.OnClickListener {
 
+            startActivity(Intent(this, FaceToFacePicker::class.java))
 
+        })
+    }
+
+    private fun logOut() {
         btnLogOut.setOnClickListener(View.OnClickListener {
 
             FirebaseAuth.getInstance().signOut()
@@ -47,20 +67,16 @@ class ListUser : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         })
-
-
-        add.setOnClickListener(View.OnClickListener {
-
-            startActivity(Intent(this, FaceToFacePicker::class.java))
-
-        })
-        swiperefreshlayoutId.setOnRefreshListener {
-            Loadlist()
-            swiperefreshlayoutId.isRefreshing = false
-        }
     }
 
-    private fun Loadlist() {
+    private fun dataInit() {
+        userRecycleView = findViewById(R.id.recyclerView)
+
+        userRecycleView.layoutManager = LinearLayoutManager(this)
+        userRecycleView.setHasFixedSize(true)
+    }
+
+    private fun addList() {
 
         userArrayList = arrayListOf<User>()
         userArrayList.clear()
@@ -73,9 +89,7 @@ class ListUser : AppCompatActivity() {
                         val user = userSnapshot.getValue(User::class.java)
                         userArrayList.add(user!!)
                     }
-//                    var aadapte:ArrayAdapter<*> = ArrayAdapter<Any?>(this,android.R.layout.activity_list_item,userArrayList)
                     userRecycleView.adapter = MyAdapter(userArrayList)
-//                    userRecycleView.onItemLong
                 }
             }
 

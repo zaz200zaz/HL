@@ -21,6 +21,7 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        //面接のリストのlayoutを設定する
       val itemView=LayoutInflater.from(parent.context).inflate(R.layout.single_view,parent,false)
         return MyViewHolder(itemView)
 
@@ -28,8 +29,10 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        //面接のリストのデータの位置を取得し、
         val currentitem = userlist[position]
 
+        ///面接者のデータを取得、例えば：名前とかメールとか、何か処理したい、表示させたい時
         holder.name.text = currentitem.名前
         holder.email.text = currentitem.メール
 
@@ -69,15 +72,14 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
             name =itemView.findViewById(R.id.name)
             condition = itemView.findViewById(R.id.condition)
             email = itemView.findViewById(R.id.singViewEmaiId)
+            //面接者をクリックされたら(tOnClickListener)データ表示画面を飛ぶ同時に面接者のメールアドレスを持っていく(intern.putExtra)
             itemView.setOnClickListener{
 
                 val position: Int = adapterPosition
                 var intern= Intent(itemView.context,Personal_Page::class.java)
-
-//                intern.putExtra("singViewNameData",name.text.toString())
                 intern.putExtra("Personal_Page_Email_Data",email.text.toString())
-
                 itemView.context.startActivity(intern)
+
             }
 
         }

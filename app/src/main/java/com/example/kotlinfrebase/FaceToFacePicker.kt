@@ -33,9 +33,11 @@ class FaceToFacePicker : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_face_to_face_picker)
 
+        //データを初期設定
         khoiTao()
-        //面接者の登録
+        //面接者の情報を登録
         toroku()
+        //結果選びボックス表示
         hienThiBangKetQua()
     }
 
@@ -88,6 +90,9 @@ class FaceToFacePicker : AppCompatActivity() {
             dialog.setCancelable(false)
             dialog.setContentView(R.layout.result)
 
+            dialog.batsu.setOnClickListener{
+                dialog.dismiss()
+            }
             dialog.button2.setOnClickListener(View.OnClickListener {
                 x1k.setText(dialog.button2.text.toString())
                 dialog.dismiss()
@@ -112,6 +117,9 @@ class FaceToFacePicker : AppCompatActivity() {
             dialog.setCancelable(false)
             dialog.setContentView(R.layout.result)
 
+            dialog.batsu.setOnClickListener{
+                dialog.dismiss()
+            }
             dialog.button2.setOnClickListener(View.OnClickListener {
                 x2k.setText(dialog.button2.text.toString())
                 dialog.dismiss()
@@ -135,7 +143,9 @@ class FaceToFacePicker : AppCompatActivity() {
             val dialog = Dialog(this)
             dialog.setCancelable(false)
             dialog.setContentView(R.layout.result)
-
+            dialog.batsu.setOnClickListener{
+                dialog.dismiss()
+            }
             dialog.button2.setOnClickListener(View.OnClickListener {
                 x3k.setText(dialog.button2.text.toString())
                 dialog.dismiss()

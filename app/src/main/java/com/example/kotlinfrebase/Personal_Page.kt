@@ -23,11 +23,9 @@ import kotlinx.android.synthetic.main.result.*
 
 
 class Personal_Page : AppCompatActivity() {
+
     lateinit var name:String
     private lateinit var mRef: DatabaseReference
-    private lateinit var mRef2: DatabaseReference
-    private lateinit var userArrayList:ArrayList<User>
-    val storageReference = FirebaseStorage.getInstance().getReference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,24 +34,25 @@ class Personal_Page : AppCompatActivity() {
         Loadlist(intent.getStringExtra("Personal_Page_Email_Data").toString().trim())
         val Return:ImageView=findViewById(R.id.Return)
 
-        //chuyen qua chon anh 履歴書写真
+        // 履歴書写真を登録画面移動
         imageChonAnh()
-        //ListUser戻る
+        //面接者のリスト表示画面に戻る
         back(Return)
-        //chay lay ket qua sau khi thay doi du lieu
-        var dataString:String =intent.getStringExtra("Personal_Page_Email_Data").toString().trim()
-        Loadlist(dataString)
-        // lam moi du lieu
+        //面接者のデータを編集し、保存する
         thayDoiVaLamMoiDuLieu()
-        //hien thi bang ket qua
+        //面接者の面接、面接の結果選びボタンを押すと結果選び画面が表示される
         hienThiBangKetQua()
+        //面接者のデータを消す
+        databaseDelete()
+
+    }
+
+    private fun databaseDelete() {
         kesu.setOnClickListener{
             kesuData(intent.getStringExtra("Personal_Page_Email_Data").toString().trim())
             startActivity(Intent(this,ListUser::class.java))
             Toast.makeText(this,"面接者のデータ削除完了",Toast.LENGTH_LONG).show()
         }
-
-
     }
 
     private fun kesuData(trim: String) {
@@ -84,21 +83,6 @@ class Personal_Page : AppCompatActivity() {
 
     }
 
-    private fun checkResutl(
-        toString: String,
-        resultOfFirstInterview2: TextView,
-        resultOfFirstInterview: TextView
-    ) {
-        if (toString!=""){
-            resultOfFirstInterview2.isGone
-            resultOfFirstInterview.visibility
-            resultOfFirstInterview.setText(toString)
-        }else{
-            resultOfFirstInterview2.visibility
-            resultOfFirstInterview.isGone
-        }
-    }
-
     private fun back(Return: ImageView) {
         Return.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this,ListUser::class.java))
@@ -116,7 +100,6 @@ class Personal_Page : AppCompatActivity() {
         }
         img.setOnClickListener {
             var intern =Intent(this,Resume::class.java)
-            var data:String =edtEmailId.text.toString()
             intern.putExtra("Personal_Page_Email_Data",edtEmailId.text.toString())
             intern.putExtra("Personal_Page_Image_Data",imageURl.text.toString())
             startActivity(intern)
@@ -159,13 +142,16 @@ class Personal_Page : AppCompatActivity() {
                 resultOfFirstInterview.setText(dialog.button4.text.toString())
                 dialog.dismiss()
             }
-
+            dialog.batsu.setOnClickListener{
+                var string:String = checkKetQua(resultOfFirstInterview.text.toString()) as String
+                resultOfFirstInterview.setText(string)
+                dialog.dismiss()
+            }
 
             dialog.show()
         }
 
         textClick2.setOnClickListener{
-
 
             val dialog = Dialog(this)
             dialog.setCancelable(false)
@@ -183,18 +169,20 @@ class Personal_Page : AppCompatActivity() {
                 resultOfSecondInterview.setText(dialog.button4.text.toString())
                 dialog.dismiss()
             }
-
-
+            dialog.batsu.setOnClickListener{
+                var string:String = checkKetQua(resultOfFirstInterview.text.toString()) as String
+                resultOfSecondInterview.setText(string)
+                dialog.dismiss()
+            }
             dialog.show()
         }
 
-        textClick3.setOnClickListener{
 
+        textClick3.setOnClickListener{
 
             val dialog = Dialog(this)
             dialog.setCancelable(false)
             dialog.setContentView(R.layout.result)
-
             dialog.button2.setOnClickListener(View.OnClickListener {
                 resultOfKensyuu.setText(dialog.button2.text.toString())
                 dialog.dismiss()
@@ -209,8 +197,15 @@ class Personal_Page : AppCompatActivity() {
             }
 
 
+            dialog.batsu.setOnClickListener{
+                var string:String = checkKetQua(resultOfFirstInterview.text.toString()) as String
+                resultOfKensyuu.setText(string)
+                dialog.dismiss()
+            }
             dialog.show()
+
         }
+
     }
 
 
@@ -252,10 +247,10 @@ class Personal_Page : AppCompatActivity() {
                             if (user1 != "") {
                                     resultOfFirstInterview.setText(user1)
                                 resultOfFirstInterview.visibility
-//                                resultOfFirstInterview2.isGone
+
                             }else{
                                 resultOfFirstInterview.isGone
-//                                resultOfFirstInterview2.visibility
+
                             }
                             firstInterviewCalendar.setText(user11)
                             commentOfFirstInterview.setText(user111)
@@ -264,7 +259,7 @@ class Personal_Page : AppCompatActivity() {
                                 resultOfSecondInterview.setText(user2)
                             }else{
                                 resultOfSecondInterview.isGone
-//                                resultOfSecondInterview2.visibility
+
                             }
                             secondInterviewCalendar.setText(user22)
                             commentOfSecondInterview.setText(user222)
@@ -273,14 +268,12 @@ class Personal_Page : AppCompatActivity() {
                                 resultOfKensyuu.setText(user3)
                             }else{
                                 resultOfKensyuu.isGone
-//                                resultOfKensyuu2.visibility
                             }
                             kensyuuCalendar.setText(user33)
                             commentOfKensyuu.setText(user333)
 
                             nyuusyaCalendar.setText(user4)
                             comment.setText(user44)
-//                            var testImage:ImageView = findViewById(com.google.firebase.database.R.id.)
                             if (user444 !=""){
                                 imageURl.setText(user444)
                                 Glide.with(applicationContext).load(user444).into(img)
@@ -351,9 +344,9 @@ class Personal_Page : AppCompatActivity() {
             }
         })
     }
-
+    //
     private fun checkKetQua(string: String): Any {
-        if (string!="結果選び"){
+        if (string!="結果選び"||string!=""){
             return string
         }
         return ""

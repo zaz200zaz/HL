@@ -29,7 +29,9 @@ class Resume:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resume)
+        //imageのデータを取得
         var dataImage =intent.getStringExtra("Personal_Page_Image_Data")
+        //もし写真のデータがなければ初期設定の写真を表示する,あったら登録された写真を表示する
         if (intent.getStringExtra("Personal_Page_Image_Data") !=""){
             Glide.with(applicationContext).load(dataImage).into(resumeImags)
         }else{

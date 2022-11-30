@@ -20,35 +20,37 @@ class Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        //データを初期設定(これがないとエラーがでます)
+        dataInit()
+        //アカウントがあるならログイン画面に飛ぶ
+        alreadyHaveAccount()
+        //登録ボタンが押されたら条件を見て登録出来るかどうか判断する
+        register()
+    }
 
-        mAuth = FirebaseAuth.getInstance()
+    private fun register() {
+        btnRegister.setOnClickListener(View.OnClickListener {
 
+            check(
+                inputEmail.text.toString().trim(),
+                InputConfirmEmail.text.toString().trim(),
+                inputPasswords.text.toString().trim(),
+                InputConfirmPassword.text.toString().trim()
+            )
+
+        })
+    }
+
+    private fun alreadyHaveAccount() {
         AlreadyHaveAccount.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this,MainActivity::class.java))
         })
-
-
-            btnRegister.setOnClickListener(View.OnClickListener
-            {
-
-//                Toast.makeText(this,"アカウント数が越えています:" +intent.getStringExtra("checkUser").toString(),Toast.LENGTH_LONG).show()
-//                if (intent.getStringExtra("checkUser").toString().equals("アカウント")){
-
-                    check(inputEmail.text.toString().trim(),InputConfirmEmail.text.toString().trim(),
-                        inputPasswords.text.toString().trim(),InputConfirmPassword.text.toString().trim(),)
-
-//                }else if(intent.getStringExtra("checkUser").toString().equals("アカウント越えている")){
-//                    Toast.makeText(this,"アカウント数が越えています",Toast.LENGTH_LONG).show()
-//                }else if(intent.getStringExtra("checkUser").toString().equals("")){
-//                    {
-//                        Toast.makeText(this, "アカウント", Toast.LENGTH_LONG).show()
-//                    }}
-            })
-
-
     }
 
-//
+    private fun dataInit() {
+        mAuth = FirebaseAuth.getInstance()
+    }
+
     private fun check(trim: String, trim1: String, trim2: String, trim3: String) {
         var checkEmail: Boolean = false
         var checkPassword: Boolean = false
@@ -56,7 +58,6 @@ class Register : AppCompatActivity() {
             Toast.makeText(this,"メールエラー",Toast.LENGTH_LONG).show()
             inputEmail.setHintTextColor(resources.getColor(android.R.color.holo_red_dark))
             InputConfirmEmail.setHintTextColor(resources.getColor(android.R.color.holo_red_dark))
-//           inputEmail.setTextColor(resources.getColor(android.R.color.holo_red_dark))
             checkEmail = false
         }else{
 
@@ -67,7 +68,6 @@ class Register : AppCompatActivity() {
             }else{
                 InputConfirmEmail.setTextColor(resources.getColor(android.R.color.holo_red_dark))
                 inputEmail.setTextColor(resources.getColor(android.R.color.holo_red_dark))
-
                 checkEmail = false
             }
         }
