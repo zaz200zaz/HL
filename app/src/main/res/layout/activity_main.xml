@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="25dp"
-        android:text="既にアカウントをお持ちですか?"
+        android:text="HL株式会社           開発チーム"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -130,6 +130,7 @@
         app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
 
     <TextView
+        android:visibility="visible"
         android:id="@+id/gotoRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

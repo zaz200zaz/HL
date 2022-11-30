@@ -27,12 +27,25 @@ class Register : AppCompatActivity() {
             startActivity(Intent(this,MainActivity::class.java))
         })
 
-        btnRegister.setOnClickListener(View.OnClickListener
-        {
 
-            check(inputEmail.text.toString().trim(),InputConfirmEmail.text.toString().trim(),
-                inputPasswords.text.toString().trim(),InputConfirmPassword.text.toString().trim(),)
-        })
+            btnRegister.setOnClickListener(View.OnClickListener
+            {
+
+//                Toast.makeText(this,"アカウント数が越えています:" +intent.getStringExtra("checkUser").toString(),Toast.LENGTH_LONG).show()
+//                if (intent.getStringExtra("checkUser").toString().equals("アカウント")){
+
+                    check(inputEmail.text.toString().trim(),InputConfirmEmail.text.toString().trim(),
+                        inputPasswords.text.toString().trim(),InputConfirmPassword.text.toString().trim(),)
+
+//                }else if(intent.getStringExtra("checkUser").toString().equals("アカウント越えている")){
+//                    Toast.makeText(this,"アカウント数が越えています",Toast.LENGTH_LONG).show()
+//                }else if(intent.getStringExtra("checkUser").toString().equals("")){
+//                    {
+//                        Toast.makeText(this, "アカウント", Toast.LENGTH_LONG).show()
+//                    }}
+            })
+
+
     }
 
 //
@@ -102,29 +115,6 @@ class Register : AppCompatActivity() {
                     Toast.makeText(this,"エラー：" + task.exception!!.message.toString(),Toast.LENGTH_LONG).show()
                 }
             }
-
-//            mAuth.createUserWithEmailAndPassword(trim,trim2).addOnCompleteListener{task ->
-//                if (task.isSuccessful){
-//                    FirebaseUserID = mAuth.currentUser!!.uid
-//                    refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(FirebaseUserID)
-//
-//                    val userHasMap = HashMap<String, Any>()
-//                    userHasMap["uid"] = FirebaseUserID
-//                    userHasMap["email"] = trim
-//                    userHasMap["password"] = trim2
-//                    refUsers.updateChildren(userHasMap)
-//                        .addOnCompleteListener{task ->
-//                            if (task.isSuccessful){
-//                                Toast.makeText(this,"登録成功",Toast.LENGTH_LONG).show()
-//
-//                            }
-//                        }
-//
-//                    //hai
-//                }
-//            }
-
         }
-
     }
 }

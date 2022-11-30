@@ -46,6 +46,7 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
             holder.condition.text = "二次面接" + currentitem.二次面接結果
         }
         if (!currentitem.研修結果.isNullOrEmpty() && !currentitem.二次面接結果.isNullOrEmpty() && !currentitem.一次面接結果.isNullOrEmpty()) {
+//            holder.condition.text = "研修結果" + currentitem.研修結果
             holder.condition.text = "研修結果" + currentitem.研修結果
         }
 
@@ -78,6 +79,7 @@ class MyAdapter( val userlist:ArrayList<User>):RecyclerView.Adapter<MyAdapter.My
 
                 itemView.context.startActivity(intern)
             }
+
         }
 
     }

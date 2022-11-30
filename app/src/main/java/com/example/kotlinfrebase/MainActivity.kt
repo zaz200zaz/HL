@@ -1,17 +1,19 @@
 package com.example.kotlinfrebase
 
 import android.app.ProgressDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isGone
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.List
@@ -20,9 +22,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var refUsers: DatabaseReference
     private var FirebaseUserID: String = ""
+    @JvmField var x = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        gotoRegister.isGone
+
 
         mAuth = FirebaseAuth.getInstance()
         loginCheck()
@@ -39,9 +47,61 @@ class MainActivity : AppCompatActivity() {
         })
 
         //新規登録機能
+
         gotoRegister.setOnClickListener(View.OnClickListener {
-            signUp()
+//            signUp()
+            //アカウント制限関数
+            checkss()
+//            Toast.makeText(this,"textClick",Toast.LENGTH_LONG).show()
         })
+    }
+
+
+
+    private fun checkss() {
+
+        var intern22 = Intent(this@MainActivity,Register::class.java)
+
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(object :
+            ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                var count:Int=0
+
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+                        count++
+                        println("dasdasd"+count)
+
+
+                        if (count>1){
+
+//                            var intern22 = Intent(this@MainActivity,Register::class.java)
+                            intern22.putExtra("checkUser","アカウント越えている")
+
+
+
+                        }else{
+
+                            intern22.putExtra("checkUser","アカウント")
+//                            startActivity(intern22)
+
+                        }
+                    }
+
+
+                }
+
+                startActivity(intern22)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
+
     }
 
     private fun loginCheck() {
@@ -77,9 +137,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun signUp(){
-        val intern = Intent(this,Register::class.java)
-        startActivity(intern)
+//        var intern22 = Intent(this@MainActivity,Register::class.java)
+
+
+
     }
+
+
+
+
     fun logOut(){
 
     }

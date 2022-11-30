@@ -4,22 +4,19 @@ package com.example.kotlinfrebase
 import android.app.Dialog
 import android.content.Intent
 
-import android.widget.Button
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.bb.*
-import kotlinx.android.synthetic.main.return_bar.*
-import kotlinx.android.synthetic.main.return_bar.Return
 
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isGone
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_personal_page.*
 import kotlinx.android.synthetic.main.result.*
@@ -50,6 +47,23 @@ class Personal_Page : AppCompatActivity() {
         thayDoiVaLamMoiDuLieu()
         //hien thi bang ket qua
         hienThiBangKetQua()
+
+
+    }
+
+    private fun checkResutl(
+        toString: String,
+        resultOfFirstInterview2: TextView,
+        resultOfFirstInterview: TextView
+    ) {
+        if (toString!=""){
+            resultOfFirstInterview2.isGone
+            resultOfFirstInterview.visibility
+            resultOfFirstInterview.setText(toString)
+        }else{
+            resultOfFirstInterview2.visibility
+            resultOfFirstInterview.isGone
+        }
     }
 
     private fun back(Return: ImageView) {
@@ -79,8 +93,15 @@ class Personal_Page : AppCompatActivity() {
     private fun thayDoiVaLamMoiDuLieu() {
         hozon.setOnClickListener(View.OnClickListener {
 
-            hozonData(intent.getStringExtra("singViewEmailData").toString().trim())
-            startActivity(Intent(this,Personal_Page::class.java).putExtra("Personal_Page_Email_Data",edtEmailId.text.toString()))
+            hozonData(intent.getStringExtra("Personal_Page_Email_Data").toString().trim())
+            startActivity(Intent(this,ListUser::class.java))
+            Toast.makeText(this,"データ更新成功",Toast.LENGTH_LONG).show()
+
+        })
+        hozon2.setOnClickListener(View.OnClickListener {
+
+            hozonData(intent.getStringExtra("Personal_Page_Email_Data").toString().trim())
+            startActivity(Intent(this,ListUser::class.java))
             Toast.makeText(this,"データ更新成功",Toast.LENGTH_LONG).show()
 
         })
@@ -197,9 +218,11 @@ class Personal_Page : AppCompatActivity() {
 
                             if (user1 != "") {
                                     resultOfFirstInterview.setText(user1)
+                                resultOfFirstInterview.visibility
+//                                resultOfFirstInterview2.isGone
                             }else{
                                 resultOfFirstInterview.isGone
-                                resultOfFirstInterview2.visibility
+//                                resultOfFirstInterview2.visibility
                             }
                             firstInterviewCalendar.setText(user11)
                             commentOfFirstInterview.setText(user111)
@@ -208,7 +231,7 @@ class Personal_Page : AppCompatActivity() {
                                 resultOfSecondInterview.setText(user2)
                             }else{
                                 resultOfSecondInterview.isGone
-                                resultOfSecondInterview2.visibility
+//                                resultOfSecondInterview2.visibility
                             }
                             secondInterviewCalendar.setText(user22)
                             commentOfSecondInterview.setText(user222)
@@ -217,7 +240,7 @@ class Personal_Page : AppCompatActivity() {
                                 resultOfKensyuu.setText(user3)
                             }else{
                                 resultOfKensyuu.isGone
-                                resultOfKensyuu2.visibility
+//                                resultOfKensyuu2.visibility
                             }
                             kensyuuCalendar.setText(user33)
                             commentOfKensyuu.setText(user333)
@@ -264,15 +287,15 @@ class Personal_Page : AppCompatActivity() {
                             userHasMap.put("名前",edtNameId.text.toString().trim())
                             userHasMap.put("メール",edtEmailId.text.toString().trim())
 
-                            userHasMap.put("一次面接結果",resultOfFirstInterview.text.toString().trim())
+                            userHasMap.put("一次面接結果",checkKetQua(resultOfFirstInterview.text.toString().trim()))
                             userHasMap.put("一次面接時間",firstInterviewCalendar.text.toString().trim())
                             userHasMap.put("一次面接コメント",commentOfFirstInterview.text.toString().trim())
 
-                            userHasMap.put("二次面接結果",resultOfSecondInterview.text.toString().trim())
+                            userHasMap.put("二次面接結果",checkKetQua(resultOfSecondInterview.text.toString().trim()))
                             userHasMap.put("二次面接時間",secondInterviewCalendar.text.toString().trim())
                             userHasMap.put("二次面接コメント",commentOfSecondInterview.text.toString().trim())
 
-                            userHasMap.put("研修結果",resultOfKensyuu.text.toString().trim())
+                            userHasMap.put("研修結果",checkKetQua(resultOfKensyuu.text.toString().trim()))
                             userHasMap.put("研修時間",kensyuuCalendar.text.toString().trim())
                             userHasMap.put("研修コメント",commentOfKensyuu.text.toString().trim())
 
@@ -294,5 +317,12 @@ class Personal_Page : AppCompatActivity() {
                 Log.d(TAG, "onCancelled: エラー："+error.message)
             }
         })
+    }
+
+    private fun checkKetQua(string: String): Any {
+        if (string!="結果選び"){
+            return string
+        }
+        return ""
     }
 }

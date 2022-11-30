@@ -38,6 +38,22 @@
             android:textSize="20sp"
             android:padding="3dp"
             android:gravity="center"/>
+
+        <Button
+            android:id="@+id/hozon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_square_bg"
+            android:padding="3dp"
+            android:text="データ保存"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/resume"
+            app:layout_constraintStart_toEndOf="@+id/Return"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.appcompat.widget.Toolbar>
