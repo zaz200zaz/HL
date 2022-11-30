@@ -47,7 +47,40 @@ class Personal_Page : AppCompatActivity() {
         thayDoiVaLamMoiDuLieu()
         //hien thi bang ket qua
         hienThiBangKetQua()
+        kesu.setOnClickListener{
+            kesuData(intent.getStringExtra("Personal_Page_Email_Data").toString().trim())
+            startActivity(Intent(this,ListUser::class.java))
+            Toast.makeText(this,"面接者のデータ削除完了",Toast.LENGTH_LONG).show()
+        }
 
+
+    }
+
+    private fun kesuData(trim: String) {
+
+        mRef= FirebaseDatabase.getInstance().getReference("FaceToFacePick")
+        mRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+
+                        val userEmail = userSnapshot.getValue(User::class.java)!!.メール
+
+                        val (a, b, c, d, e) = userSnapshot.ref.toString().split("/")
+                        Log.d(TAG, "onDataChange1: " + e)
+                        if (userEmail.equals(trim)) {
+                            FirebaseDatabase.getInstance().getReference("FaceToFacePick").child(e).removeValue()
+                            break
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        }
+        )
 
     }
 

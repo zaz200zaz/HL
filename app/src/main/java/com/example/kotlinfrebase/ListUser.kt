@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 import android.view.View
+import android.widget.ArrayAdapter
 
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -27,11 +28,14 @@ class ListUser : AppCompatActivity() {
     private lateinit var userArrayList: ArrayList<User>
 
     override fun onCreate(savedInstanceState: Bundle1?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+
         Loadlist()
         userRecycleView = findViewById(R.id.recyclerView)
+
         userRecycleView.layoutManager = LinearLayoutManager(this)
         userRecycleView.setHasFixedSize(true)
 
@@ -69,7 +73,9 @@ class ListUser : AppCompatActivity() {
                         val user = userSnapshot.getValue(User::class.java)
                         userArrayList.add(user!!)
                     }
+//                    var aadapte:ArrayAdapter<*> = ArrayAdapter<Any?>(this,android.R.layout.activity_list_item,userArrayList)
                     userRecycleView.adapter = MyAdapter(userArrayList)
+//                    userRecycleView.onItemLong
                 }
             }
 

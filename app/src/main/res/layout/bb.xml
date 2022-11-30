@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_bar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
@@ -10,49 +11,68 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/Return"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_return"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
-
-
-        <Button
-            android:id="@+id/resume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/white_square_bg"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="履歴書"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:padding="3dp"
-            android:gravity="center"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/hozon2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_square_bg"
-            android:padding="3dp"
-            android:text="データ保存"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/resume"
-            app:layout_constraintStart_toEndOf="@+id/Return"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:id="@+id/Return"
+                android:layout_width="30dp"
+
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_return" />
+
+
+
+
+            <Button
+                android:layout_margin="5dp"
+
+                android:id="@+id/kesu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/white_square_bg"
+                android:text="消す"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/resume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_square_bg"
+
+                android:text="履歴書"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_margin="5dp"
+
+                android:id="@+id/hozon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/white_square_bg"
+                android:text="保存"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
